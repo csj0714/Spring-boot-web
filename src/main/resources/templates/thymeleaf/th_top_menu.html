@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- 	th:fragment : 조각 페이지 정의 -->
+	<nav th:fragment="test_top_menu" class="navbar navbar-expand-lg navbar-light bg-light" >
+	<a class="navbar-brand" href="/"><img src="/images/title_image.png"></a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false"
+		aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active"><a class="nav-link" href="/user/insert">회원가입<span
+					class="sr-only"></span></a></li>
+			<div th:if="${username}">
+		        <li class="nav-item"><a class="nav-link" href="/user/logout">로그아웃</a></li>
+		    </div>
+		    <div th:unless="${username}">
+		        <li class="nav-item"><a class="nav-link" href="/user/login">로그인</a></li>
+		    </div>
+			
+			<li class="nav-item"><a class="nav-link" href="/user/info">내 정보</a></li>
+		</ul>
+		
+		<form class="form-inline my-2 my-lg-0" action="m_searchList">
+			<select class="selectpicker" name="searchKey">
+			    <option value="id">ID</option>
+			    <option value="name">NAME</option>
+			 </select>
+			 
+			<input class="form-control mr-sm-2" type="search"
+				placeholder="Search" aria-label="Search" name="searchWord" value="ad">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+		</form>
+	</div>
+</nav>
+
+</body>
+</html>
+

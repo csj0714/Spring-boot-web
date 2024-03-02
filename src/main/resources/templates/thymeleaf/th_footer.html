@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- 	th:fragment : 조각 페이지 정의 -->
+	<footer th:fragment="test_copy" class="my-3 text-center text-small">
+		<p class="mb-1">&copy; 2024 YANGSSEM thymeleaf footer 1</p>
+	</footer>
+
+	<footer th:fragment="test_copyParam (param1, param2)"
+		class="my-3 text-center text-small">
+		<span th:text="${param1}"></span>
+		<span th:text="${param2}"></span>
+		<p class="mb-1">&copy; Serendi Date</p>
+	</footer>
+
+</body>
+</html>

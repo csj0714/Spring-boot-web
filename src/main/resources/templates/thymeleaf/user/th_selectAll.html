@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="common_content(title)">
+	<div class="container">
+		<div class="input-form-backgroud row">
+			<div class="input-form col-md-12 mx-auto">
+				<h4 class="mb-3">[[${title}]]</h4>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">ID</th>
+							<th scope="col">PW</th>
+							<th scope="col">NAME</th>
+							<th scope="col">TEL</th>
+							<th scope="col">REGDATE</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<th:block th:each="vo : ${vos}">
+							<tr>
+								<th scope="row"><a th:href="|m_selectOne?num=${vo.num}|"><span>[[${vo.num}]]</span></a></th>
+								<td><a th:href="|m_selectOne?num=${vo.num}|"><span
+										th:text="${vo.id}"></span></a></td>
+								<td><span th:text="${vo.pw}"></span></td>
+								<td><span th:text="${vo.name}"></span></td>
+								<td><span th:text="${vo.tel}"></span></td>
+								<td><span th:text="${vo.regdate}"></span></td>
+									<td><a th:href="|m_delete?num=${vo.num}|"><span>delete</span></a></td>
+							</tr>
+						</th:block>
+					</tbody>
+					<tfoot>
+						<tr>
+		                	<td colspan="6" >
+								<th:block th:each="i : ${#numbers.sequence(1,totalPageCount)}">
+				                	<th:block th:if="${param.searchKey}== null">
+					                	<a th:href="|m_selectAll?cpage=${i}|">[[${i}]] &nbsp;</a>
+			                		</th:block>
+			                		<th:block th:if="${param.searchKey}!= null">
+					                	<a th:href="@{m_searchList(cpage=${i},searchKey=${param.searchKey},searchWord=${param.searchWord})}">[[${i}]] &nbsp;</a>
+			                		</th:block>
+			                	</th:block>
+		                	</td>
+            			</tr>
+					</tfoot>
+				</table>
+				
+			</div>
+		</div>
+	</div>
+</div>
+</html>

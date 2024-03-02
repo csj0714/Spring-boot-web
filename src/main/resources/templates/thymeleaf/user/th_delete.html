@@ -1,0 +1,26 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="common_content(title)">
+	<div class="container">
+		<div class="input-form-backgroud row">
+			<div class="input-form col-md-12 mx-auto">
+				<h4 class="mb-3">[[${title}]]</h4>
+				<form class="validation-form" novalidate action="m_deleteOK"
+					method="post">
+
+					<div class="mb-3">
+						<label for="id">NUM</label> : 
+						<span th:text="${param.num}"></span> 번을 정말 삭제하시겠습니까?
+						<input type="hidden" class="form-control"
+							name="num" id="num" placeholder="" th:value="${param.num}" required>
+						<div class="invalid-feedback"></div>
+					</div>
+					
+					<div class="mb-4"></div>
+					<button class="btn btn-primary btn-lg btn-block" type="submit">삭제
+						완료</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+</html>

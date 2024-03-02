@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <!-- 부트스트랩 CSS 링크 추가 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>회원가입</h2>
+    <form th:action="@{/user/insertOK}" method="post">
+        <div class="form-group">
+            <label for="username">사용자명:</label>
+            <input type="text" class="form-control" id="username" name="username" th:required="true">
+        </div>
+        <div class="form-group">
+            <label for="pw">비밀번호:</label>
+            <input type="password" class="form-control" id="pw" name="pw" th:required="true">
+        </div>
+		<div class="form-group">
+            <label for="gender">성별:</label>
+            <input type="text" class="form-control" id="gender" name="gender" th:required="true">
+        </div>
+        <div class="form-group">
+            <label for="pw">취미:</label>
+            <input type="text" class="form-control" id="hobby" name="hobby" th:required="true">
+        </div>
+        <div class="form-group">
+            <label for="age">나이:</label>
+            <input type="number" class="form-control" id="age" name="age" th:required="true">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">가입</button>
+    </form>
+</div>
+</body>
+</html>
+
