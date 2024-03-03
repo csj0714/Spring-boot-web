@@ -45,40 +45,37 @@ public class UserController {
 		log.info("result:{}", result);
 
 		if (result != null) {
-			return "redirect:home";
+			return "redirect:/home";
 		} else {
 			return "redirect:u_insert";
 		}
 	}
 	@GetMapping("/user/info")
-	public String u_selectOne(UserDTO vo, Model model) {
+	public String info(UserDTO vo, Model model) {
 		log.info("회원정보페이지");
 		log.info("vo:{}", vo);
-
-//		UserDTO vo2 = service.selectOne(vo);
-		UserDTO vo2 = new UserDTO();
-		vo2.setNum(1);
-		vo2.setAge(11);
-		vo2.setGender("남자");
-		vo2.setHoddy("취미");
-		vo2.setUsername("아이디");
-		vo2.setName("이름");
-		vo2.setPw("패스워드");
-		vo2.setSave_name("프로필이미지");
-		vo2.setSchool("학교");
-		vo2.setTel("전화");
 		
-
-		model.addAttribute("content", "thymeleaf/user/th_selectOne");
-		model.addAttribute("title", "회원정보페이지");
-		return "thymeleaf/user/th_selectOne";
-	}
-	@GetMapping("/user/info/update")
-	public String u_update(Model model) {
-		log.info("회원수정페이지");
+		String username = (String)session.getAttribute("username");
+		String pw = (String)session.getAttribute("pw");
+		String gender = (String)session.getAttribute("gender");
+		String hobby = (String)session.getAttribute("hobby");
+		int age = (Integer)session.getAttribute("age");
+		String name = (String)session.getAttribute("name");
+		String school = (String)session.getAttribute("school");
+		String tel = (String)session.getAttribute("tel");
 		
-		model.addAttribute("content", "thymeleaf/user/th_update");
 		model.addAttribute("title", "회원수정페이지");
+		model.addAttribute("username", username);
+		model.addAttribute("pw", pw);
+		model.addAttribute("gender", gender);
+		model.addAttribute("hobby", hobby);
+		model.addAttribute("age", age);
+		model.addAttribute("name", name);
+		model.addAttribute("school", school);
+		model.addAttribute("tel", tel);
+
+		model.addAttribute("content", "thymeleaf/user/th_update");
+		model.addAttribute("title", "회원정보페이지");
 		return "thymeleaf/user/th_update";
 	}
 	@PostMapping("/user/info/updateOK")
@@ -92,12 +89,14 @@ public class UserController {
 		UserDTO result = service.updateOK(vo);
 		log.info("result:{}", result);
 
-		return "redirect:m_selectOne?num=" + vo.getNum();
+		return "redirect:/";
 	}
 
 	@GetMapping("/user/info/delete")
 	public String u_deleteOK(UserDTO vo, Model model) {
 		log.info("회원삭제페이지");
+		
+
 		
 		model.addAttribute("content", "thymeleaf/user/th_delete");
 		model.addAttribute("title", "회원삭제페이지");
@@ -136,6 +135,15 @@ public class UserController {
 		}
 		else {
 			session.setAttribute("username", vo2.getUsername());
+			session.setAttribute("pw", vo2.getPw());
+			session.setAttribute("gender", vo2.getGender());
+			session.setAttribute("hobby", vo2.getHobby());
+			session.setAttribute("age", vo2.getAge());
+			session.setAttribute("name", vo2.getName());
+			session.setAttribute("school", vo2.getSchool());
+			session.setAttribute("tel", vo2.getTel());
+			session.setAttribute("savename", vo2.getSave_name());
+			
 			return "redirect:/";
 		}
 		

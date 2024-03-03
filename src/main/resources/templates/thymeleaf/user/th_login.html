@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-
+<div th:insert="thymeleaf/th_top_menu :: test_top_menu"></div>
 <div class="container mt-5">
     <h2 class="mb-3">로그인</h2>
     <form th:action="@{/user/loginOK}" method="post">
@@ -22,7 +22,7 @@
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
 </div>
-
+<div th:replace="thymeleaf/th_footer :: test_copyParam('Serendi date','010-0000-0000')">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

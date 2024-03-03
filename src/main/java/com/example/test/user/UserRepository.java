@@ -12,4 +12,6 @@ public interface UserRepository extends JpaRepository<UserDTO, Object> {
 
 	public UserDTO findByUsernameAndPw(String username, String pw);
 
+	public UserDTO findByUsername(String username);
+
 }

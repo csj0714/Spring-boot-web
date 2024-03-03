@@ -8,9 +8,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+	<div th:insert="thymeleaf/th_top_menu :: test_top_menu"></div>
 <div class="container">
+	
     <h2>회원가입</h2>
     <form th:action="@{/user/insertOK}" method="post">
+		<div class="form-group">
+            <label for="name">이름:</label>
+            <input type="text" class="form-control" id="name" name="name" th:required="true">
+        </div>
         <div class="form-group">
             <label for="username">사용자명:</label>
             <input type="text" class="form-control" id="username" name="username" th:required="true">
@@ -25,16 +31,24 @@
         </div>
         <div class="form-group">
             <label for="pw">취미:</label>
-            <input type="text" class="form-control" id="hobby" name="hobby" th:required="true">
+            <input type="text" class="form-control" id="hobby" name="hobby" th:required="false">
         </div>
         <div class="form-group">
             <label for="age">나이:</label>
-            <input type="number" class="form-control" id="age" name="age" th:required="true">
+            <input type="number" class="form-control" id="age" name="age" th:required="false">
         </div>
-        
+        <div class="form-group">
+            <label for="school">학교:</label>
+            <input type="text" class="form-control" id="school" name="school" th:required="false">
+        </div>
+        <div class="form-group">
+            <label for="tel">학교:</label>
+            <input type="text" class="form-control" id="tel" name="tel" th:required="false">
+        </div>
         <button type="submit" class="btn btn-primary">가입</button>
     </form>
 </div>
+<div th:replace="thymeleaf/th_footer :: test_copyParam('Serendi date','010-0000-0000')">
 </body>
 </html>
 

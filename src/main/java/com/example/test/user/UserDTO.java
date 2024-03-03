@@ -34,6 +34,9 @@ public class UserDTO {
 	@Column(name="num")//컬럼이름 설정
 	private int num;
 	
+	@Column(name="name",nullable = false)
+	private String name;
+	
 	@Column(name="user_name",nullable = false)
 	private String username;
 	
@@ -41,13 +44,10 @@ public class UserDTO {
 	private String pw;
 	
 	@Column(name="hobby",nullable = true)
-	private String hoddy;
+	private String hobby;
 	
 	@Column(name="age",nullable = true)
 	private int age;
-	
-	@Column(name="name",nullable = true)
-	private String name;
 	
 	@Column(name="gender",nullable = true)
 	private String gender;
