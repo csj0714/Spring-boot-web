@@ -14,36 +14,32 @@
     <h2>회원가입</h2>
     <form th:action="@{/user/insertOK}" method="post">
 		<div class="form-group">
-            <label for="name">이름:</label>
+            <label for="name">(필수) 이름:</label>
             <input type="text" class="form-control" id="name" name="name" th:required="true">
         </div>
         <div class="form-group">
-            <label for="username">사용자명:</label>
+            <label for="username">(필수) 사용자명:</label>
             <input type="text" class="form-control" id="username" name="username" th:required="true">
         </div>
         <div class="form-group">
-            <label for="pw">비밀번호:</label>
+            <label for="pw">(필수) 비밀번호:</label>
             <input type="password" class="form-control" id="pw" name="pw" th:required="true">
         </div>
 		<div class="form-group">
-            <label for="gender">성별:</label>
+            <label for="gender">(필수) 성별:</label>
             <input type="text" class="form-control" id="gender" name="gender" th:required="true">
         </div>
         <div class="form-group">
-            <label for="pw">취미:</label>
+            <label for="pw">(선택) 취미:</label>
             <input type="text" class="form-control" id="hobby" name="hobby" th:required="false">
         </div>
         <div class="form-group">
-            <label for="age">나이:</label>
+            <label for="age">(선택) 나이:</label>
             <input type="number" class="form-control" id="age" name="age" th:required="false">
         </div>
         <div class="form-group">
-            <label for="school">학교:</label>
+            <label for="school">(선택) 학교:</label>
             <input type="text" class="form-control" id="school" name="school" th:required="false">
-        </div>
-        <div class="form-group">
-            <label for="tel">학교:</label>
-            <input type="text" class="form-control" id="tel" name="tel" th:required="false">
         </div>
         <button type="submit" class="btn btn-primary">가입</button>
     </form>

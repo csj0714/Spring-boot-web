@@ -59,7 +59,7 @@ public class UserController {
 		String pw = (String)session.getAttribute("pw");
 		String gender = (String)session.getAttribute("gender");
 		String hobby = (String)session.getAttribute("hobby");
-		int age = (Integer)session.getAttribute("age");
+		Integer age = (Integer)session.getAttribute("age");
 		String name = (String)session.getAttribute("name");
 		String school = (String)session.getAttribute("school");
 		String tel = (String)session.getAttribute("tel");
@@ -154,6 +154,14 @@ public class UserController {
 		log.info("로그인 확인");
 		
 		session.removeAttribute("username");
+		session.removeAttribute("pw");
+		session.removeAttribute("gender");
+		session.removeAttribute("hobby");
+		session.removeAttribute("age");
+		session.removeAttribute("name");
+		session.removeAttribute("school");
+		session.removeAttribute("tel");
+		session.removeAttribute("savename");
 		
 		return "redirect:/";
 	}

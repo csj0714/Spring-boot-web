@@ -47,7 +47,7 @@ public class UserDTO {
 	private String hobby;
 	
 	@Column(name="age",nullable = true)
-	private int age;
+	private Integer age;
 	
 	@Column(name="gender",nullable = true)
 	private String gender;
