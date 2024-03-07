@@ -42,6 +42,7 @@
             <input type="text" class="form-control" id="school" name="school" th:required="false">
         </div>
         <button type="submit" class="btn btn-primary">가입</button>
+        <a th:href="@{/user/login}" class="btn btn-primary">뒤로 가기</a>
     </form>
 </div>
 <div th:replace="thymeleaf/th_footer :: test_copyParam('Serendi date','010-0000-0000')">

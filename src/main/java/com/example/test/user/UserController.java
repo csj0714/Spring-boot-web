@@ -24,9 +24,11 @@ public class UserController {
 	
 	@GetMapping("/user")
 	public String user(Model model) {
-		log.info("마이페이지");
+		log.info("내 정보");
+		String username = (String)session.getAttribute("username");
+		model.addAttribute("username",username);
 		
-		return "thymeleaf/user/th_layout_main";
+		return "thymeleaf/user/th_user";
 	}
 	@GetMapping("/user/insert")
 	public String u_insert(Model model) {
@@ -93,26 +95,36 @@ public class UserController {
 	}
 
 	@GetMapping("/user/info/delete")
-	public String u_deleteOK(UserDTO vo, Model model) {
+	public String u_delete(UserDTO vo, Model model) {
 		log.info("회원삭제페이지");
 		
+		String username = (String)session.getAttribute("username");
 
+		model.addAttribute("username", username);
 		
 		model.addAttribute("content", "thymeleaf/user/th_delete");
 		model.addAttribute("title", "회원삭제페이지");
 		
 		return "thymeleaf/user/th_delete";
 	}
+
 	@Transactional
 	@PostMapping("/user/info/deleteOK")
-	public String u_deleteOK(UserDTO vo) {
-		log.info("/m_deleteOK...");
-		log.info("vo:{}", vo);
-
-		int result = service.deleteOK(vo);
+	public String u_deleteOK(String username) {
+		log.info("/u_deleteOK...");
+		log.info("vo:{}", username);
+		
+		
+		int result = service.deleteOK(username);
 		log.info("result:{}", result);
 
-		return "redirect:m_selectAll";
+		if(result == 1) {
+			return "redirect:/user/logout";
+		}else {
+			return "redirect:/user/info/delete";
+		}
+
+		
 	}
 	@GetMapping("/user/login")
 	public String login(Model model) {
@@ -134,6 +146,7 @@ public class UserController {
 			return "redirect:login";
 		}
 		else {
+			session.setAttribute("num", vo2.getNum());
 			session.setAttribute("username", vo2.getUsername());
 			session.setAttribute("pw", vo2.getPw());
 			session.setAttribute("gender", vo2.getGender());

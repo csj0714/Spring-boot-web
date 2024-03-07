@@ -8,10 +8,10 @@ public interface UserRepository extends JpaRepository<UserDTO, Object> {
 
 	public UserDTO findByNum(int num);
 
-	public int deleteByNum(int num);
-
 	public UserDTO findByUsernameAndPw(String username, String pw);
 
 	public UserDTO findByUsername(String username);
+
+	public int deleteByUsername(String username);
 
 }

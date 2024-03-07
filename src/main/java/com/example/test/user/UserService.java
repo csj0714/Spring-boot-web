@@ -59,8 +59,8 @@ public class UserService {
 	    session.setAttribute("tel", user.getTel());
 	    session.setAttribute("savename", user.getSave_name());
 	}
-	public int deleteOK(UserDTO vo) {
-		return userRepo.deleteByNum(vo.getNum());
+	public int deleteOK(String username) {
+		return userRepo.deleteByUsername(username);
 	}
 	public UserDTO loginOK(UserDTO vo) {
 		return userRepo.findByUsernameAndPw(vo.getUsername(),vo.getPw());
