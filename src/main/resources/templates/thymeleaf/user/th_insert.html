@@ -6,6 +6,26 @@
     <title>회원가입</title>
     <!-- 부트스트랩 CSS 링크 추가 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+    .radio-buttons input[type="radio"] {
+        display: none; /* 기존 라디오 버튼 숨기기 */
+    }
+    
+    .radio-buttons label {
+        display: inline-block;
+        padding: 8px 16px;
+        margin-right: 10px;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .radio-buttons input[type="radio"]:checked + label {
+        background-color: #2196F3;
+        color: white;
+    }
+	</style>
 </head>
 <body>
 	<div th:insert="thymeleaf/th_top_menu :: test_top_menu"></div>
@@ -26,9 +46,19 @@
             <input type="password" class="form-control" id="pw" name="pw" th:required="true">
         </div>
 		<div class="form-group">
-            <label for="gender">(필수) 성별:</label>
-            <input type="text" class="form-control" id="gender" name="gender" th:required="true">
-        </div>
+		    <label for="gender">(필수) 성별:</label><br>
+		    <div class="radio-buttons">
+		        <input type="radio" id="male" name="gender" value="남성" th:required="true">
+		        <label for="male">남성</label>
+		        
+		        <input type="radio" id="female" name="gender" value="여성">
+		        <label for="female">여성</label>
+		        
+		        <input type="radio" id="other" name="gender" value="공개안함">
+		        <label for="other">공개안함</label>
+		    </div>
+		</div>
+
         <div class="form-group">
             <label for="pw">(선택) 취미:</label>
             <input type="text" class="form-control" id="hobby" name="hobby" th:required="false">
@@ -40,6 +70,10 @@
         <div class="form-group">
             <label for="school">(선택) 학교:</label>
             <input type="text" class="form-control" id="school" name="school" th:required="false">
+        </div>
+        <div class="form-group">
+            <label for="tel">(선택) 전화번호:</label>
+            <input type="text" class="form-control" id="tel" name="tel" th:required="false">
         </div>
         <button type="submit" class="btn btn-primary">가입</button>
         <a th:href="@{/user/login}" class="btn btn-primary">뒤로 가기</a>

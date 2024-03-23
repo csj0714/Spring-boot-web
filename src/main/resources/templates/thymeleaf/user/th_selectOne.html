@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 정보</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <h1>회원 정보</h1>
+    <div th:if="${username}">
+        <p>이름: <span th:text="${name}"></span></p>
+        <p>아이디: <span th:text="${username}"></span></p>
+        <p>비밀번호: <span th:text="${#strings.repeat('*', pw.length)}"></span></p>
+        <p>성별: <span th:text="${gender}"></span></p>
+        <p>취미: <span th:text="${hobby}"></span></p>
+        <p>나이: <span th:text="${age}"></span></p>
+        <p>학교: <span th:text="${school}"></span></p>
+        <p>전화번호: <span th:text="${tel}"></span></p>
+    </div>
+    <div th:unless="${username}">
+        <p>회원 정보가 없습니다.</p>
+    </div>
+    <a th:href="@{/user/info/update}"><button type="button" class="btn btn-primary">정보 수정</button></a>
+    <a th:href="@{/user}" class="btn btn-primary">뒤로 가기</a>
+</body>
+</html>

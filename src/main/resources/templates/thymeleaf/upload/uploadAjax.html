@@ -1,0 +1,91 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>uploadEx</title>
+</head>
+
+<body>
+
+	<input name="uploadFiles" type="file" multiple>
+	<button class="uploadBtn">Upload</button>
+
+	<div class="uploadResult"></div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+	<!--upload btn-->
+	<script>
+
+		$('.uploadBtn').click(() => {
+
+            const formData = new FormData();
+
+            const inputFile = $("input[type='file']");
+
+			const files = inputFile[0].files;
+
+            for(let i = 0; i < files.length; i++) {
+                console.log(files[i]);
+                formData.append("uploadFiles", files[i]);
+			}
+
+			const showUploadedImages = arr => {
+                console.log(arr);
+
+                const divArea = $(".uploadResult");
+
+                for(let i = 0; i<arr.length; i++){
+                    divArea.append("<img src='/display?fileName="+arr[i].imageURL+"' alt='..null'>");
+				}
+			}
+
+            /*실제 업로드 부분*/
+			/*upload ajax*/
+			$.ajax({
+				url: '/uploadAjax',
+				processData: false,
+				contentType: false, // 파일 업로드를 multipart/form-data 타입을 사용하기 위함
+				data: formData,
+				type: 'POST',
+				dataType: 'json',
+				success: result => {
+                    console.log(result);
+					showUploadedImages(result);
+                },
+				error: (jqXHR, textStatus, errorThrown) => {
+                    console.log(textStatus)
+				}
+			})
+
+		})
+		const showUploadedImages = arr => {
+                console.log(arr);
+
+                const divArea = $(".uploadResult");
+
+                for(let i = 0; i<arr.length; i++){
+                    divArea.append("<div>" +
+						"<img src='/display?fileName="+arr[i].thumbnailURL+"' alt='..null'>" +
+						"<button class='removeBtn' data-name='"+arr[i].imageURL+"'>REMOVE</button>" +
+						"</div>");
+				}
+			}
+			$(".uploadResult").on("click", ".removeBtn", function(e){
+
+            const target = $(this);
+            const fileName = target.data("name");
+            const targetDiv = $(this).closest("div");
+
+            console.log(fileName);
+
+            $.post('/removeFile', {fileName: fileName}, function(result) {
+                console.log(result);
+                if(result===true) {
+                    targetDiv.remove();
+				}
+			})
+
+		})
+	</script>
+</body>
+</html>

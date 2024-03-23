@@ -20,20 +20,40 @@
 <body>
 	<div th:insert="thymeleaf/th_top_menu :: test_top_menu"></div>
     <div class="container">
-        <h2>사용자 페이지</h2>
+        <h2>게시판 페이지</h2>
+     	    <h1>게시판 목록</h1>
+	    <table>
+	        <thead>
+	            <tr>
+	                <th>번호</th>
+	                <th>제목</th>
+	                <th>내용</th>
+	                <th>작성자</th>
+	                <th>작성날짜</th>
+	            </tr>
+	        </thead>
+	        <tbody>
+	            <tr th:each="vo : ${vos}">
+	                <td th:text="${vo.num}"></td>
+	                <td th:text="${vo.title}"></td>
+	                <td th:text="${vo.content}"></td>
+	                <td th:text="${vo.writer}"></td>
+	                <td th:text="${vo.wdate}"></td>
+	            </tr>
+	        </tbody>
+	    </table>
+	    
+		
+        <!-- 게시판 수정 링크 -->
+        <a th:href="@{/board/insert}" class="btn btn-link">게시판 쓰기</a>
+        <a th:href="@{/board/myBoard}" class="btn btn-link">내 게시판</a>
+        <a th:href="@{/board/myBoard}" class="btn btn-link">내 게시판</a>
         
-        <!-- 로그인 링크 -->
-        <div th:if="${username}">
-			<a th:href="@{/user/logout}" class="btn btn-link">로그아웃</a>
-        </div>
-        <div th:unless="${username}">
-			 <a th:href="@{/user/login}" class="btn btn-link">로그인</a>
-        </div>
         
-     
-        <!-- 정보 수정 링크 -->
-        <a th:href="@{/user/info}" class="btn btn-link">내 정보</a>
         <a th:href="@{/}" class="btn btn-link">뒤로 가기</a>
+        
+        <!-- 게시판 목록 -->
+        
         
 
     </div>

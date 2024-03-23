@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <!-- 부트스트랩 CSS 링크 추가 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div th:insert="thymeleaf/th_top_menu :: test_top_menu"></div>
+	<!-- 게시글 작성 폼 -->
+	    <form method="post" action="/post">
+	        <label for="title">제목:</label><br>
+	        <input type="text" id="title" name="title"><br>
+	        <label for="content">내용:</label><br>
+	        <textarea id="content" name="content"></textarea><br>
+	        <input type="submit" value="작성">
+	    </form>
+<div th:replace="thymeleaf/th_footer :: test_copyParam('Serendi date','010-0000-0000')">
+</body>
+</html>
+

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
@@ -52,9 +53,9 @@ public class UserController {
 			return "redirect:u_insert";
 		}
 	}
-	@GetMapping("/user/info")
+	@GetMapping("/user/info/update")
 	public String info(UserDTO vo, Model model) {
-		log.info("회원정보페이지");
+		log.info("회원수정페이지");
 		log.info("vo:{}", vo);
 		
 		String username = (String)session.getAttribute("username");
@@ -77,7 +78,7 @@ public class UserController {
 		model.addAttribute("tel", tel);
 
 		model.addAttribute("content", "thymeleaf/user/th_update");
-		model.addAttribute("title", "회원정보페이지");
+		model.addAttribute("title", "회원수정페이지");
 		return "thymeleaf/user/th_update";
 	}
 	@PostMapping("/user/info/updateOK")
@@ -91,7 +92,11 @@ public class UserController {
 		UserDTO result = service.updateOK(vo);
 		log.info("result:{}", result);
 
-		return "redirect:/";
+		if(result != null) {
+			return "redirect:/user/info";
+		}else {
+			return "redirect:/user/info/update";
+		}
 	}
 
 	@GetMapping("/user/info/delete")
@@ -177,5 +182,33 @@ public class UserController {
 		session.removeAttribute("savename");
 		
 		return "redirect:/";
+	}
+	@GetMapping("/user/info")
+	public String selectOne(Model model) {
+		log.info("회원정보페이지");
+		
+		String username = (String)session.getAttribute("username");
+		String pw = (String)session.getAttribute("pw");
+		String gender = (String)session.getAttribute("gender");
+		String hobby = (String)session.getAttribute("hobby");
+		Integer age = (Integer)session.getAttribute("age");
+		String name = (String)session.getAttribute("name");
+		String school = (String)session.getAttribute("school");
+		String tel = (String)session.getAttribute("tel");
+		
+		model.addAttribute("title", "회원수정페이지");
+		model.addAttribute("username", username);
+		model.addAttribute("pw", pw);
+		model.addAttribute("gender", gender);
+		model.addAttribute("hobby", hobby);
+		model.addAttribute("age", age);
+		model.addAttribute("name", name);
+		model.addAttribute("school", school);
+		model.addAttribute("tel", tel);
+
+		model.addAttribute("content", "thymeleaf/user/th_update");
+		model.addAttribute("title", "회원정보페이지");
+		
+		return "thymeleaf/user/th_selectOne";
 	}
 }

@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+    .radio-buttons input[type="radio"] {
+        display: none; /* 기존 라디오 버튼 숨기기 */
+    }
+    
+    .radio-buttons label {
+        display: inline-block;
+        padding: 8px 16px;
+        margin-right: 10px;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .radio-buttons input[type="radio"]:checked + label {
+        background-color: #2196F3;
+        color: white;
+    }
+	</style>
 </head>
 <body>
 <div th:insert="thymeleaf/th_top_menu :: test_top_menu"></div>
@@ -18,32 +38,44 @@
         </div>
 
         <div class="form-group">
-            <label for="pw">비밀번호:</span></label>
+            <label for="pw">비밀번호: <span th:text="${#strings.repeat('*', pw.length)}"></span></label>
             <input type="hidden" class="form-control" id="pw" name="pw" th:value="${pw}" required>
         </div>
         <div class="form-group">
-            <label for="name">이름:</label>
+            <label for="name">이름:</label> 
             <input type="text" class="form-control" id="name" name="name" th:value="${name}" required>
         </div>
-        <div class="form-group">
-            <label for="gender">성별:</label>
-            <input type="text" class="form-control" id="gender" name="gender" th:value="${gender}" required>
-        </div>
+		<div class="form-group">
+		    <label for="gender">(필수) 성별:</label><br>
+		    <div class="radio-buttons">
+		        <input type="radio" id="male" name="gender" value="남성" th:required="true" th:checked="${gender == '남성'}">
+		        <label for="male">남성</label>
+		        
+		        <input type="radio" id="female" name="gender" value="여성" th:checked="${gender == '여성'}">
+		        <label for="female">여성</label>
+		        
+		        <input type="radio" id="other" name="gender" value="공개안함" th:checked="${gender == '공개안함'}">
+		        <label for="other">공개안함</label>
+		    </div>
+		</div>
         <div class="form-group">
             <label for="hobby">취미:</label>
-            <input type="text" class="form-control" id="hobby" name="hobby" th:value="${hobby}" required>
+            <input type="text" class="form-control" id="hobby" name="hobby" th:value="${hobby}">
         </div>
         <div class="form-group">
             <label for="tel">전화번호:</label>
-            <input type="text" class="form-control" id="tel" name="tel" th:value="${tel}" required>
+            <input type="text" class="form-control" id="tel" name="tel" th:value="${tel}">
         </div>
-
+		<div class="form-group">
+            <label for="age">나이:</label>
+            <input type="text" class="form-control" id="age" name="age" th:value="${age}">
+        </div>
         <div class="form-group">
             <label for="school">학교:</label>
-            <input type="text" class="form-control" id="school" name="school" th:value="${school}" required>
+            <input type="text" class="form-control" id="school" name="school" th:value="${school}">
         </div>
 
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary">저장</button>
         <a href="/user/info/delete"><button type="button" class="btn btn-primary">Delete</button></a>
     	<a th:href="@{/user}" class="btn btn-primary">뒤로 가기</a>
     </form>

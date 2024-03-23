@@ -2,8 +2,8 @@ package com.example.test.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
+
+
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +37,7 @@ public class UserService {
 	        existingUser.setHobby(vo.getHobby());
 	        existingUser.setSchool(vo.getSchool());
 	        existingUser.setTel(vo.getTel());
+	        existingUser.setAge(vo.getAge());
 	        
 	        updateSession(existingUser);
 	        return userRepo.save(existingUser);
@@ -65,6 +66,8 @@ public class UserService {
 	public UserDTO loginOK(UserDTO vo) {
 		return userRepo.findByUsernameAndPw(vo.getUsername(),vo.getPw());
 	}
+
+
 
 	
 
