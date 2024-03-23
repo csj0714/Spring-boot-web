@@ -48,10 +48,10 @@
 		<div class="form-group">
 		    <label for="gender">(필수) 성별:</label><br>
 		    <div class="radio-buttons">
-		        <input type="radio" id="male" name="gender" value="남성" th:required="true" th:checked="${gender == '남성'}">
+		        <input type="radio" id="male" name="gender" value="남" th:required="true" th:checked="${gender == '남'}">
 		        <label for="male">남성</label>
 		        
-		        <input type="radio" id="female" name="gender" value="여성" th:checked="${gender == '여성'}">
+		        <input type="radio" id="female" name="gender" value="여" th:checked="${gender == '여'}">
 		        <label for="female">여성</label>
 		        
 		        <input type="radio" id="other" name="gender" value="공개안함" th:checked="${gender == '공개안함'}">
@@ -76,7 +76,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">저장</button>
-        <a href="/user/info/delete"><button type="button" class="btn btn-primary">Delete</button></a>
+        <a href="/user/info/delete"><button type="button" class="btn btn-primary">삭제</button></a>
     	<a th:href="@{/user}" class="btn btn-primary">뒤로 가기</a>
     </form>
 </div>

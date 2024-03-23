@@ -104,8 +104,10 @@ public class UserController {
 		log.info("회원삭제페이지");
 		
 		String username = (String)session.getAttribute("username");
+		String name = (String)session.getAttribute("name");
 
 		model.addAttribute("username", username);
+		model.addAttribute("name", name);
 		
 		model.addAttribute("content", "thymeleaf/user/th_delete");
 		model.addAttribute("title", "회원삭제페이지");

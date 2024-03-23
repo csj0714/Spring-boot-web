@@ -14,7 +14,7 @@
         <h2>회원삭제</h2>
         <form th:action="@{/user/info/deleteOK}" method="post">
             <div class="form-group">
-            <label for="name"><span th:text="${username}"></span>를 삭제하시겠습니까?</label>
+            <label for="name"><span th:text="${name}"></span>님의 회원정보를 정말 삭제하시겠습니까?</label>
             <input type="hidden" class="form-control" id="username" name="username" th:value="${username}" required>
             </div>
             <button type="submit" class="btn btn-danger">삭제</button>
