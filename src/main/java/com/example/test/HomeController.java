@@ -22,10 +22,11 @@ public class HomeController {
 		
         // 세션에서 사용자 이름 가져오기
         String username = (String) session.getAttribute("username");
+        String name = (String) session.getAttribute("name");
         log.info(username);
         // 모델에 사용자 이름 추가
         model.addAttribute("username", username);
-		
+        model.addAttribute("username", name);
 		
 		
 		return "thymeleaf/th_home";
@@ -34,7 +35,9 @@ public class HomeController {
 	public String menu(HttpSession session, Model model) {
 		
 		String username = (String) session.getAttribute("username");
+		
 		model.addAttribute("username", username);
+		
 		
 		return "thymeleaf/th_top_menu";
 	}

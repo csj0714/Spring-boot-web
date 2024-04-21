@@ -1,37 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>thymeleaf</title>
-
-	<link href="/css/main.css" rel="stylesheet">
-
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Thymeleaf</title>
+    <link href="/css/main.css" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+	<style>
+		p{
+			font-family: "Noto Sans KR", sans-serif;
+			  font-weight: 10px;
+			  font-style: normal;
+		}
+		.footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        body{
+			background-color: white;
+		}
+		.sub_main{
+			display: flex; 
+		}
+		.sub_main a img{
+			width: 100%; /* 이미지를 부모 요소의 너비에 맞게 조절 */
+            height: auto; /* 가로 세로 비율 유지 */
+		}
+	</style>
 </head>
-
 <body>
-	<!-- 	thymeleaf폴더명/th_top_menu확장자뺀파일명 :: test_top_menu조각명 -->
-	<div th:insert="thymeleaf/th_top_menu :: test_top_menu"></div>
-	
-	<img src="/images/main_image.png" width="100%">
-	
-	<div th:if="${username}">
-        <p>Welcome, <span th:text="${username}"></span>!</p>
+    
+    <img src="/images/main.png" width="100%">
+    
+	    <img src="/images/sub_image.png" width="100%">
+	    <div class="sub_main">
+		    <a href="/user/info"><img src="/images/my_card6.png"></a>
+	    </div>
+    <div  style="background-color: white">
+    <div th:if="${username}">
+        <p>안녕하세요, <span th:text="${username}"></span>님!</p>
+        <div id="countdown" style="color: green;"></div> <!-- 시간을 표시할 영역 -->
     </div>
     <div th:unless="${username}">
         <p>Please log in</p>
     </div>
-
-	<div th:replace="thymeleaf/th_footer :: test_copyParam('Serendi date','010-0000-0000')">
 	
-</body>
+    <div th:replace="thymeleaf/th_footer :: test_copyParam('Serendi date','010-0000-0000')"></div>
+	</div>
+    <!-- JavaScript 코드 -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        function updateCountdown() {
+		    // 특정 날짜 설정 (월은 0부터 시작)
+		    const targetDate = new Date(2024, 3, 22, 22, 0, 0); // 예: 2024년 6월 1일
+		
+		    // 현재 시간
+		    const now = new Date();
+		
+		    // 특정 날짜까지의 남은 시간 계산 (밀리초 단위)
+		    const diff = targetDate.getTime() - now.getTime();
+		
+		    // 시간, 분, 초 계산
+		    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+		    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+		    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+		
+		    // 결과를 HTML 요소에 반영
+		    const countdownElement = document.getElementById('countdown');
+		    countdownElement.innerHTML = `
+		    	<p></p>ㄴ
+		        <p>다음 소개팅 시간까지: ${days}:${hours}:${minutes}:${seconds}</p>
+		    `;
+		}
 
+
+        // 초기 실행
+        updateCountdown();
+
+        // 1초마다 업데이트
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
 </html>
+

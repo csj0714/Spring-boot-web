@@ -26,7 +26,7 @@ public class UserInterceptor implements HandlerInterceptor{
 		log.info("sPath:{}", sPath);
 		log.info("username:{}", session.getAttribute("username"));
 		
-		if(sPath.equals("/user/logout") || sPath.equals("/user/info") || sPath.equals("/user/info/updateOK") || sPath.equals("/user/info/delete") || sPath.equals("/user/info/deleteOK")) {
+		if(sPath.equals("/user/logout") || sPath.equals("/user/info") || sPath.equals("/user/info/updateOK") || sPath.equals("/user/info/delete") || sPath.equals("/user/info/deleteOK") || sPath.equals("/user/info/update") ) {
 			if(session.getAttribute("username")==null) {
 				response.sendRedirect("/user/login");
 				return false;

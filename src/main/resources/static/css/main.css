@@ -1,18 +1,18 @@
 body {
 	min-height: 100vh;
-	background: -webkit-gradient(linear, left bottom, right top, from(#92b5db),
-		to(#1d466c));
-	background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-	background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
+	background: -webkit-gradient(linear, left bottom, right top, from(white),
+		to(white));
+	background: -webkit-linear-gradient(bottom left, white);
+	background: -moz-linear-gradient(bottom left, white);
+	background: -o-linear-gradient(bottom left, white);
+	background: linear-gradient(to top right, white);
 }
 
 .input-form {
 	max-width: 680px;
 	margin-top: 80px;
 	padding: 32px;
-	background: #fff;
+	background: white;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
@@ -24,7 +24,7 @@ body {
 select {
 	width: 100px;
 	padding: .4em .5em;
-	border: 1px solid #999;
+	border: 1px solid white;
 	font-family: inherit;
 	background: url('/images/arrow.png') no-repeat 95% 50%;
 	border-radius: 0px;

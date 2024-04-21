@@ -3,24 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>회원 정보</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f2f2f2; /* 회색 배경색 */
+        }
+
+        .user-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 460px;
+            height: 670px;
+            background-color: #fff; /* 카드 배경색 */
+            background-image: url('/images/my_card5.png');
+            background-size: cover;
+            padding-left: 50px;
+			padding-top: 150px;
+        }
+    </style>
+    </style>
 </head>
 <body>
-    <h1>회원 정보</h1>
-    <div th:if="${username}">
-        <p>이름: <span th:text="${name}"></span></p>
-        <p>아이디: <span th:text="${username}"></span></p>
-        <p>비밀번호: <span th:text="${#strings.repeat('*', pw.length)}"></span></p>
-        <p>성별: <span th:text="${gender}"></span></p>
-        <p>취미: <span th:text="${hobby}"></span></p>
-        <p>나이: <span th:text="${age}"></span></p>
-        <p>학교: <span th:text="${school}"></span></p>
-        <p>전화번호: <span th:text="${tel}"></span></p>
+	<div th:replace="thymeleaf/th_top_menu :: test_top_menu"></div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+            <div th:if="${username}" class="user-card">
+                <div class="info">
+	                <p><strong>안녕하세요,  <span th:text="${name}"></span>님</strong></p>
+	                <p><strong>이름:</strong> <span th:text="${name}"></span></p>
+	                <p><strong>아이디:</strong> <span th:text="${username}"></span></p>
+<!--	                <p><strong>비밀번호:</strong> <span th:text="${#strings.repeat('*', pw.length)}"></span></p>-->
+	                <p><strong>성별:</strong> <span th:text="${gender}"></span></p>
+	                <p><strong>취미:</strong> <span th:text="${hobby}"></span></p>
+	                <p><strong>나이:</strong> <span th:text="${age}"></span></p>
+	                <p><strong>학교:</strong> <span th:text="${school}"></span></p>
+	                <p><strong>전화번호:</strong> <span th:text="${tel}"></span></p>
+                </div>
+            </div>
+            <div th:unless="${username}" class="text-center">
+                <p>회원 정보가 없습니다.</p>
+            </div>
+            
+            <div class="text-center">
+                <a th:href="@{/user/info/update}" class="btn btn-primary mr-2">정보 수정</a>
+                <a th:href="@{/user}" class="btn btn-primary">뒤로 가기</a>
+            </div>
+        </div>
     </div>
-    <div th:unless="${username}">
-        <p>회원 정보가 없습니다.</p>
-    </div>
-    <a th:href="@{/user/info/update}"><button type="button" class="btn btn-primary">정보 수정</button></a>
-    <a th:href="@{/user}" class="btn btn-primary">뒤로 가기</a>
+</div>
+
 </body>
 </html>
+

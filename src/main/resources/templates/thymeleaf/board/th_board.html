@@ -15,49 +15,18 @@
             margin-bottom: 10px;
             display: block;
         }
+        .footer{
+			
+		}
     </style>
 </head>
 <body>
 	<div th:insert="thymeleaf/th_top_menu :: test_top_menu"></div>
     <div class="container">
-        <h2>게시판 페이지</h2>
-     	    <h1>게시판 목록</h1>
-	    <table>
-	        <thead>
-	            <tr>
-	                <th>번호</th>
-	                <th>제목</th>
-	                <th>내용</th>
-	                <th>작성자</th>
-	                <th>작성날짜</th>
-	            </tr>
-	        </thead>
-	        <tbody>
-	            <tr th:each="vo : ${vos}">
-	                <td th:text="${vo.num}"></td>
-	                <td th:text="${vo.title}"></td>
-	                <td th:text="${vo.content}"></td>
-	                <td th:text="${vo.writer}"></td>
-	                <td th:text="${vo.wdate}"></td>
-	            </tr>
-	        </tbody>
-	    </table>
-	    
-		
-        <!-- 게시판 수정 링크 -->
-        <a th:href="@{/board/insert}" class="btn btn-link">게시판 쓰기</a>
-        <a th:href="@{/board/myBoard}" class="btn btn-link">내 게시판</a>
-        <a th:href="@{/board/myBoard}" class="btn btn-link">내 게시판</a>
-        
-        
-        <a th:href="@{/}" class="btn btn-link">뒤로 가기</a>
-        
-        <!-- 게시판 목록 -->
-        
-        
-
+		<a href="https://forms.gle/We4yr9NGqfRdmZnw9"><img src="images/card_choice5.png" width="49%"></a>
+		<a href="https://forms.gle/Utpe2fTrWtH9bism9"><img src="images/card_choice6.png" width="49%"></a>
     </div>
-    <div th:replace="thymeleaf/th_footer :: test_copyParam('Serendi date','010-0000-0000')">
+    <div class = "footer" clath:replace="thymeleaf/th_footer :: test_copyParam('Serendi date','010-0000-0000')">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
