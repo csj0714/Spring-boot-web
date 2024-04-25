@@ -13,8 +13,7 @@ import lombok.Data;
 public class BoardDTO {
 
 	@Id  //pk설정
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_board_jpa")
-	@SequenceGenerator(sequenceName = "seq_board_jpa",  allocationSize = 1,   name = "seq_board_jpa")// 시퀀스 자동생성된다.
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="num")//컬럼이름 설정
 	private int num;
 	

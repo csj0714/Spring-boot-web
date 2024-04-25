@@ -159,7 +159,7 @@ public class UserController {
 			session.setAttribute("gender", vo2.getGender());
 			session.setAttribute("hobby", vo2.getHobby());
 			session.setAttribute("age", vo2.getAge());
-			session.setAttribute("name", vo2.getName());
+			session.setAttribute("name", vo2.getRealname());
 			session.setAttribute("school", vo2.getSchool());
 			session.setAttribute("tel", vo2.getTel());
 			session.setAttribute("savename", vo2.getSave_name());

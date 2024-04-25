@@ -30,7 +30,7 @@ public class UserService {
 	    UserDTO existingUser = userRepo.findByUsername(vo.getUsername());
 	    if (existingUser != null) {
 	        // existingUser가 null이 아닌 경우에만 업데이트를 수행
-	        existingUser.setName(vo.getName());
+	        existingUser.setRealname(vo.getRealname());
 	        existingUser.setPw(vo.getPw());
 	        existingUser.setTel(vo.getTel());
 	        existingUser.setGender(vo.getGender());
@@ -55,7 +55,7 @@ public class UserService {
 	    session.setAttribute("gender", user.getGender());
 	    session.setAttribute("hobby", user.getHobby());
 	    session.setAttribute("age", user.getAge());
-	    session.setAttribute("name", user.getName());
+	    session.setAttribute("name", user.getRealname());
 	    session.setAttribute("school", user.getSchool());
 	    session.setAttribute("tel", user.getTel());
 	    session.setAttribute("savename", user.getSave_name());

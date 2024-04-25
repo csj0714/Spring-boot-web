@@ -26,7 +26,7 @@ public class HomeController {
         log.info(username);
         // 모델에 사용자 이름 추가
         model.addAttribute("username", username);
-        model.addAttribute("username", name);
+        model.addAttribute("name", name);
 		
 		
 		return "thymeleaf/th_home";

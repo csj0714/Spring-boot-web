@@ -3,14 +3,12 @@ package com.example.test.user;
 import java.util.Date;
 
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -23,21 +21,20 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="USERS",uniqueConstraints = {
+@Table(name="users",uniqueConstraints = {
 		@UniqueConstraint(columnNames = {"user_name"})
 })
 public class UserDTO {
 	
-	@Id	//pk설정
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_member_jpa")
-	@SequenceGenerator(sequenceName = "seq_member_jpa", allocationSize = 1, name = "seq_member_jpa")// 시퀀스 자동생성된다.
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="num")//컬럼이름 설정
 	private int num;
 	
-	@Column(name="name",nullable = false)
-	private String name;
+	@Column(name="realname",nullable = false)
+	private String realname;
 	
-	@Column(name="user_name",nullable = false)
+	@Column(name="username",nullable = false)
 	private String username;
 	
 	@Column(name="pw",nullable = false)
