@@ -3,6 +3,7 @@ package com.example.test.user;
 import java.util.Date;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -57,6 +58,10 @@ public class UserDTO {
 	
 	@Column(name="save_name",nullable = true)
 	private String save_name;
+	
+	@Column(name="file_path",nullable = true)
+	private String file_path;
+	
 	
 	//날짜타입의 기본은 타임스템프
 	@Temporal(TemporalType.TIMESTAMP)//연월일 시분초 밀리초

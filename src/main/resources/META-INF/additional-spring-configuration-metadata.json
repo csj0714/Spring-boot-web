@@ -8,5 +8,10 @@
     "name": "com.example.ex8_fileupload.upload.path",
     "type": "java.lang.String",
     "description": "A description for 'com.example.ex8_fileupload.upload.path'"
+  },
+  {
+    "name": "upload.path",
+    "type": "java.lang.String",
+    "description": "A description for 'upload.path'"
   }
 ]}

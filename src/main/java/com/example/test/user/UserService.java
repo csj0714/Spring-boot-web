@@ -38,6 +38,9 @@ public class UserService {
 	        existingUser.setSchool(vo.getSchool());
 	        existingUser.setTel(vo.getTel());
 	        existingUser.setAge(vo.getAge());
+	        existingUser.setSave_name(vo.getSave_name());
+	        existingUser.setFile_path(vo.getFile_path());
+	        
 	        
 	        updateSession(existingUser);
 	        return userRepo.save(existingUser);

@@ -23,7 +23,7 @@
             padding-left: 50px;
 			padding-top: 150px;
         }
-    </style> 
+    </style>
     </style>
 </head>
 <body>
@@ -42,10 +42,7 @@
 	                <p><strong>나이:</strong> <span th:text="${age}"></span></p>
 	                <p><strong>학교:</strong> <span th:text="${school}"></span></p>
 	                <p><strong>전화번호:</strong> <span th:text="${tel}"></span></p>
-					<img th:src="@{'/files/' + ${savename}}" alt="Image">
-
-
- 
+	                <p><strong>프로필사진: <img src="resources/uploadimg/${vo.save_img}"></strong></p>
                 </div>
             </div>
             <div th:unless="${username}" class="text-center">
