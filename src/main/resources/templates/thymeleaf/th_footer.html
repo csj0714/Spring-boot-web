@@ -29,7 +29,7 @@
         <div class="col" th:if="${session.username}"><a th:href="@{/user/logout}" class="nav-link"><img src="/images/logout_icon.png"></a></div>
         <div class="col" th:unless="${session.username}"><a th:href="@{/user/login}" class="nav-link"><img src="/images/login_icon.png"></a></div>
         <div class="col"><a th:href="@{/user}" class="nav-link"><img src="/images/mypage_icon.png"></a></div>
-        <div class="col"><a th:href="@{/board}" class="nav-link"><img src="/images/meeting_icon2.png"></a></div>
+        <div class="col"><a th:href="@{/meeting}" class="nav-link"><img src="/images/meeting_icon2.png"></a></div>
     </div>
 </div>
 </footer>
