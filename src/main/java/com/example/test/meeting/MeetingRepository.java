@@ -6,8 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.test.user.UserDTO;
 
 @Repository
-public interface MeetingRepository extends JpaRepository<UserDTO, Object> {
-
-	public UserDTO findByNum(int num);
+public interface MeetingRepository extends JpaRepository<MeetingDTO, Object> {
 
 }

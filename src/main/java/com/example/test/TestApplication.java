@@ -10,7 +10,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 @ComponentScan
 @SpringBootApplication
-@EntityScan(basePackages = {"com.example.test.user","com.example.test.board"})
+@EntityScan(basePackages = {"com.example.test.user","com.example.test.board","com.example.test.meeting"})
 public class TestApplication {
 	
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {

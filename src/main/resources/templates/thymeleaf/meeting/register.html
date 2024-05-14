@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미팅신청</title>
+    <!-- 부트스트랩 CSS 링크 추가 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div th:insert="thymeleaf/th_top_menu :: test_top_menu"></div>
+    <div class="container">
+        
+        <h2>미팅신청</h2>
+        <form th:action="@{/meeting/registerOK}" method="post">
+            <div class="form-group">
+            <label for="name"><span th:text="${vo2.realname}"></span>님에게 미팅신청을 하시겠습니까?</label>
+            <input type="hidden" class="form-control" id="num" name="num" th:value="${vo2.num}" required>
+            </div>
+            <button type="submit" class="btn btn-danger">신청하기</button>
+        </form>
+    </div>
+</body>
+</html>

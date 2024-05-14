@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.test.user.UserDTO;
+import com.example.test.user.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,9 @@ public class MeetingService {
 	private MeetingRepository meetingRepo;
 	
 	@Autowired
+	private UserRepository userRepo;
+	
+	@Autowired
 	private HttpSession session;
 
 	public List<UserDTO> selectRandomTwo() {
@@ -28,7 +32,7 @@ public class MeetingService {
 		String gender = (String) session.getAttribute("gender");
 		
 		log.info("selectRandomTwo...");
-	    List<UserDTO> allUsers = meetingRepo.findAll(); // 모든 사용자를 가져옵니다.
+	    List<UserDTO> allUsers = userRepo.findAll(); // 모든 사용자를 가져옵니다.
 	    log.info("allUsers:{}", allUsers);
 	    
 	    List<UserDTO> usersExceptLoggedIn = allUsers.stream()
@@ -55,6 +59,10 @@ public class MeetingService {
 	    UserDTO user2 = usersExceptLoggedIn.get(index2); // 두 번째 랜덤한 사용자
 
 	    return List.of(user1, user2); // 선택된 두 사용자를 리스트로 반환
+	}
+
+	public MeetingDTO registerMeeting(MeetingDTO dto) {
+		return meetingRepo.save(dto);
 	}
 
 
