@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -17,9 +18,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="meetings",uniqueConstraints = {
-		@UniqueConstraint(columnNames = {"username"})
-})
+@Table(name="meetings")
 public class MeetingDTO {
 	
 	@Id
@@ -27,21 +26,24 @@ public class MeetingDTO {
 	@Column(name="num")//컬럼이름 설정
 	private int num;
 	
-	@Column(name="realname",nullable = false)
-	private String realname;
+	@Column(name="applicantRealName",nullable = false)
+	private String applicantRealName;
 	
-	@Column(name="username",nullable = false)
-	private String username;
+	@Column(name="applicantNickname",nullable = false)
+	private String applicantNickname;
 	
-	@Column(name="select_realname",nullable = false)
-	private String select_realname;
+	@Column(name="receiverRealName",nullable = false)
+	private String receiverRealName;
 	
-	@Column(name="select_username",nullable = false)
-	private String select_username;
+	@Column(name="receiverNickname",nullable = false)
+	private String receiverNickname;
 	
-	@Temporal(TemporalType.TIMESTAMP)//연월일 시분초 밀리초
-//	@Temporal(TemporalType.DATE)//연월일
-	@Column(name="regdate",insertable = false) //입력시 sysdate으로 처리,수정시 널값반영(이럴때는 new Date()처리해준다.)
-	@ColumnDefault(value="sysdate")
-	private Date regdate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "regdate", updatable = false)
+    private Date regdate;
+
+    @PrePersist
+    protected void onCreate() {
+        regdate = new Date();
+    }
 }

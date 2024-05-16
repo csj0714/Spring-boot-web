@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="common_content(title)">
+	<div class="container">
+		<div class="input-form-backgroud row">
+			<div class="input-form col-md-12 mx-auto">
+				<h4 class="mb-3">[[${title}]]</h4>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">NUM</th>
+							<th scope="col">신청자</th>
+							<th scope="col">신청자닉네임</th>
+							<th scope="col">신청자받은사람</th>
+							<th scope="col">신청자받은사람닉네임</th>
+							<th scope="col">REGDATE</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<th:block th:each="vo : ${vos}">
+							<tr>
+								<td><a th:href="|m_selectOne?num=${vo.num}|"><span
+										th:text="${vo.num}"></span></a></td>
+								<td><span th:text="${vo.realname}"></span></td>
+								<td><span th:text="${vo.username}"></span></td>
+								<td><span th:text="${vo.select_realname}"></span></td>
+								<td><span th:text="${vo.select_username}"></span></td>
+								<td><span th:text="${vo.regdate}"></span></td>
+									<td><a th:href="|m_delete?num=${vo.num}|"><span>delete</span></a></td>
+							</tr>
+						</th:block>
+						
+					</tbody>
+					<tfoot>
+						<tr>
+						<td><a th:href="|/meeting|"><span>뒤로가기</span></a></tfoot>
+						</tr>
+					</tfoot>
+				</table>
+				
+			</div>
+		</div>
+	</div>
+</div>
+</html>

@@ -6,18 +6,26 @@
     <title>미팅신청</title>
     <!-- 부트스트랩 CSS 링크 추가 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function showPopup() {
+            alert("미팅 신청이 완료되었습니다.");
+        }
+        /*]]>*/
+    </script>
 </head>
+
 <body>
+	
     <div th:insert="thymeleaf/th_top_menu :: test_top_menu"></div>
     <div class="container">
-        
         <h2>미팅신청</h2>
-        <form th:action="@{/meeting/registerOK}" method="post">
+        <form th:action="@{/meeting/registerOK}" method="post" onsubmit="showPopup()">
             <div class="form-group">
             <label for="name"><span th:text="${vo2.realname}"></span>님에게 미팅신청을 하시겠습니까?</label>
             <input type="hidden" class="form-control" id="num" name="num" th:value="${vo2.num}" required>
             </div>
-            <button type="submit" class="btn btn-danger">신청하기</button>
+            <button id="btn" type="submit" class="btn btn-danger">신청하기</button>
         </form>
     </div>
 </body>

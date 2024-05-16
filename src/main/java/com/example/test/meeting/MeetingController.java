@@ -1,5 +1,7 @@
 package com.example.test.meeting;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MeetingController {
 	
 	@Autowired
-	private MeetingService service;
+	private MeetingService meetingService;
 	
 	@Autowired
 	private UserService userService;
@@ -32,7 +34,7 @@ public class MeetingController {
 	public String meeting(Model model) {
 		log.info("/meeting...");
 		
-		List<UserDTO> vos = service.selectRandomTwo();
+		List<UserDTO> vos = meetingService.selectRandomTwo();
 		log.info("vos :{}", vos.toString());
         
 		model.addAttribute("vos", vos);
@@ -69,21 +71,36 @@ public class MeetingController {
 		
 		
 		MeetingDTO dto = new MeetingDTO();
-		dto.setUsername(vo2.getUsername());
-		dto.setRealname(vo2.getRealname());
-		dto.setSelect_username(username);
-		dto.setSelect_realname(name);
+		dto.setApplicantNickname(username);
+		dto.setApplicantRealName(name);
+		dto.setReceiverNickname(vo2.getUsername());
+		dto.setReceiverRealName(vo2.getRealname());
 		log.info(dto.toString());
 		
-		MeetingDTO registeredMeeting  = service.registerMeeting(dto);
+		MeetingDTO registeredMeeting  = meetingService.registerMeeting(dto);
 		
 		
+	    String msg;
+	    if(registeredMeeting != null) {
+	        msg = "미팅 신청이 완료되었습니다.";
+	        log.info(msg);
+	        session.setAttribute("msg", msg);
+	        return "redirect:/";
+	    } else {
+	        msg = "미팅 신청에 실패했습니다.";
+	        session.setAttribute("msg", msg);
+	        return "redirect:/meeting";
+	    }
+	}
+	@GetMapping("/meeting/selectAll")
+	public String meetingAll(Model model) {
+		log.info("/meeting/selectAll...");
 		
-		if(registeredMeeting  != null) {
-			return "redirect:/";
-		}else {
-			return "redirect:/meeting";
-		}
+		List<MeetingDTO> vos = meetingService.selectAll();
+		
+		model.addAttribute("vos", vos);
+		
+		return "thymeleaf/meeting/selectAll";
 	}
 	
 }

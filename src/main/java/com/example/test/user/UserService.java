@@ -1,5 +1,7 @@
 package com.example.test.user;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,6 +71,9 @@ public class UserService {
 	public UserDTO loginOK(UserDTO vo) {
 		return userRepo.findByUsernameAndPw(vo.getUsername(),vo.getPw());
 	}
+
+
+
 
 
 

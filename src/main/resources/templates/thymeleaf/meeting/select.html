@@ -50,7 +50,7 @@
 						<th:block th:each="vo : ${vos}">
 							<tr>
 								<th scope="row"><a th:href="|/meeting/register?num=${vo.num}|"><span>[[${vo.num}]]</span></a></th>
-								<td><img th:src="@{'/files/' + ${vo.save_name}}" alt="Image"></td>
+								<td><img th:src="@{'/files/' + ${vo.save_name}}" alt="Image" width="100px"></td>
 								<td><a th:href="|/meeting/register?num=${vo.num}|"><span
 										th:text="${vo.username}"></span></a></td>
 								<td><span th:text="${vo.gender}"></span></td>
@@ -63,7 +63,7 @@
 						</th:block>
 					</tbody>
 				</table>
-				
+				<a th:href="|/meeting/selectAll|"><span>미팅목록</span></a>
 			</div>
 		</div>
 	</div>

@@ -11,6 +11,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+	<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<style>
 		p{
 			font-family: "Noto Sans KR", sans-serif;
@@ -39,7 +41,14 @@
 	</style>
 </head>
 <body>
-    
+	<script th:inline="javascript">
+    /*<![CDATA[*/
+    function showLogoutPopup() {
+        alert("로그아웃 되었습니다.");
+    }
+    /*]]>*/
+</script>
+
     <img src="/images/main.png" width="100%">
     
 	    <img src="/images/sub_image.png" width="100%">
@@ -54,7 +63,6 @@
     <div th:unless="${username}">
         <p>Please log in</p>
     </div>
-	
     <div th:replace="thymeleaf/th_footer :: test_copyParam('Serendi date','010-0000-0000')"></div>
 	</div>
     <!-- JavaScript 코드 -->

@@ -57,14 +57,20 @@ public class MeetingService {
 	    } while (index2 == index1); // 두 번째 인덱스가 첫 번째 인덱스와 같은 경우 다시 선택
 
 	    UserDTO user2 = usersExceptLoggedIn.get(index2); // 두 번째 랜덤한 사용자
+	    
 
 	    return List.of(user1, user2); // 선택된 두 사용자를 리스트로 반환
 	}
 
+
 	public MeetingDTO registerMeeting(MeetingDTO dto) {
+		log.info("디티오:{}",dto.toString());
 		return meetingRepo.save(dto);
 	}
 
+	public List<MeetingDTO> selectAll() {
+		return meetingRepo.findAll();
+	}
 
 
 }
