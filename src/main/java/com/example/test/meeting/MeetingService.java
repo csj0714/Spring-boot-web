@@ -11,6 +11,7 @@ import com.example.test.user.UserDTO;
 import com.example.test.user.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -70,6 +71,29 @@ public class MeetingService {
 
 	public List<MeetingDTO> selectAll() {
 		return meetingRepo.findAll();
+	}
+
+
+	public List<MeetingDTO> selectOne(int num) {
+		return meetingRepo.findByApplicantNum(num);
+	}
+
+
+	public List<MeetingDTO> selectReceiver(int receiverNum) {
+		return meetingRepo.findByApplicantNum(receiverNum);
+	}
+
+
+	public MeetingDTO selectByReceiverAndApplicant(int receiverNum, int applicantNum) {
+		return meetingRepo.findByReceiverNumAndApplicantNum(receiverNum, applicantNum);
+	}
+
+	public int deleteByReceiverAndApplicant(int receiverNum, int applicantNum) {
+		return meetingRepo.deleteByReceiverNumAndApplicantNum(receiverNum, applicantNum);
+	}
+	@Transactional
+	public int deleteByNum(int num) {
+		return meetingRepo.deleteByNum(num);
 	}
 
 

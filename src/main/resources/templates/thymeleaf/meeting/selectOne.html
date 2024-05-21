@@ -35,13 +35,11 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th scope="col">#</th>
-							<th scope="col">프로필사진</th>
-							<th scope="col">ID</th>
-							<th scope="col">성별</th>
-							<th scope="col">PW</th>
-							<th scope="col">NAME</th>
-							<th scope="col">TEL</th>
+							<th scope="col">NUM</th>
+							<th scope="col">신청자</th>
+							<th scope="col">신청자닉네임</th>
+							<th scope="col">신청자받은사람</th>
+							<th scope="col">신청자받은사람닉네임</th>
 							<th scope="col">REGDATE</th>
 							<th scope="col"></th>
 						</tr>
@@ -50,25 +48,22 @@
 						<th:block th:each="vo : ${vos}">
 							<tr>
 								<th scope="row"><a th:href="|/meeting/register?num=${vo.num}|"><span>[[${vo.num}]]</span></a></th>
-								<td><img th:src="@{'/files/' + ${vo.save_name}}" alt="Image" width="100px"></td>
-								<td><a th:href="|/meeting/register?num=${vo.num}|"><span
-										th:text="${vo.username}"></span></a></td>
-								<td><span th:text="${vo.gender}"></span></td>
-								<td><span th:text="${vo.pw}"></span></td>
-								<td><span th:text="${vo.realname}"></span></td>
-								<td><span th:text="${vo.tel}"></span></td>
+								<td><span th:text="${vo.applicantNum}"></span></td>
+								<td><span th:text="${vo.applicantRealName}"></span></td>
+								<td><span th:text="${vo.applicantNickname}"></span></td>
+								<td><span th:text="${vo.receiverNum}"></span></td>
+								<td><span th:text="${vo.receiverRealName}"></span></td>
+								<td><span th:text="${vo.receiverNickname}"></span></td>
 								<td><span th:text="${vo.regdate}"></span></td>
-									<td><a th:href="|/meeting/register?num=${vo.num}|"><span>선택</span></a></td>
+									<td><a th:href="|/meeting/delete?receiverNum=${vo.receiverNum}&applicantNum=${vo.applicantNum}|"><span>delete</span></a></td>
 							</tr>
 						</th:block>
 					</tbody>
 				</table>
-				<a th:href="|/meeting/selectAll|"><span>미팅전체목록</span></a>
-				<a th:href="|/meeting/selectOne|"><span>나의미팅</span></a>
+				<a th:href="|/meeting/selectAll|"><span>미팅목록</span></a>
 			</div>
 		</div>
 	</div>
 
 </body>
 </html>
-

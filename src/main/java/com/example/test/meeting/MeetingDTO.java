@@ -26,11 +26,17 @@ public class MeetingDTO {
 	@Column(name="num")//컬럼이름 설정
 	private int num;
 	
+	@Column(name="applicantNum",nullable = false)
+	private int applicantNum;
+	
 	@Column(name="applicantRealName",nullable = false)
 	private String applicantRealName;
 	
 	@Column(name="applicantNickname",nullable = false)
 	private String applicantNickname;
+	
+	@Column(name="receiverNum",nullable = false)
+	private int receiverNum;
 	
 	@Column(name="receiverRealName",nullable = false)
 	private String receiverRealName;

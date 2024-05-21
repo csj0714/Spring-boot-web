@@ -21,12 +21,12 @@
 							<tr>
 								<td><a th:href="|m_selectOne?num=${vo.num}|"><span
 										th:text="${vo.num}"></span></a></td>
-								<td><span th:text="${vo.realname}"></span></td>
-								<td><span th:text="${vo.username}"></span></td>
-								<td><span th:text="${vo.select_realname}"></span></td>
-								<td><span th:text="${vo.select_username}"></span></td>
+								<td><span th:text="${vo.applicantRealName}"></span></td>
+								<td><span th:text="${vo.applicantNickname}"></span></td>
+								<td><span th:text="${vo.receiverRealName}"></span></td>
+								<td><span th:text="${vo.receiverNickname}"></span></td>
 								<td><span th:text="${vo.regdate}"></span></td>
-									<td><a th:href="|m_delete?num=${vo.num}|"><span>delete</span></a></td>
+									<td><a th:href="|/meeting/delete?receiverNum=${vo.receiverNum}|"><span>delete</span></a></td>
 							</tr>
 						</th:block>
 						
