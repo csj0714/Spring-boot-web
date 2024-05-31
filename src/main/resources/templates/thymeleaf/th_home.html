@@ -8,18 +8,29 @@
     <link href="/css/main.css" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-	<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<style>
-		p{
-			font-family: "Noto Sans KR", sans-serif;
-			  font-weight: 10px;
-			  font-style: normal;
-		}
-		.footer {
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <style>
+        p {
+            font-family: "Noto Sans KR", sans-serif;
+            font-weight: 10px;
+            font-style: normal;
+        }
+   
+        body {
+            background-color: white;
+            margin-bottom: 60px; /* ensure content doesn't overlap the footer */
+        }
+        .sub_main {
+            display: flex; 
+        }
+        .sub_main a img {
+            width: 100%; /* 이미지 부모 요소의 너비에 맞게 조절 */
+            height: auto; /* 가로 세로 비율 유지 */
+        }
+        .footer-container {
             position: fixed;
             bottom: 0;
             left: 0;
@@ -28,69 +39,66 @@
             text-align: center;
             padding: 10px 0;
         }
-        body{
-			background-color: white;
-		}
-		.sub_main{
-			display: flex; 
-		}
-		.sub_main a img{
-			width: 100%; /* 이미지를 부모 요소의 너비에 맞게 조절 */
-            height: auto; /* 가로 세로 비율 유지 */
-		}
-	</style>
+    </style>
 </head>
 <body>
-	<script th:inline="javascript">
+    <script th:inline="javascript">
     /*<![CDATA[*/
     function showLogoutPopup() {
         alert("로그아웃 되었습니다.");
     }
     /*]]>*/
-</script>
+    </script>
 
-    <img src="/images/main.png" width="100%">
+    <img src="/images/home.png" width="100%">
     
-	    <img src="/images/sub_image.png" width="100%">
-	    <div class="sub_main">
-		    <a href="/user/info"><img src="/images/my_card6.png"></a>
-	    </div>
-    <div  style="background-color: white">
-    <div th:if="${username}">
-        <p>안녕하세요, <span th:text="${name}"></span>님!</p>
-        <div id="countdown" style="color: green;"></div> <!-- 시간을 표시할 영역 -->
+    <div style="background-color: white">
+        <div th:if="${username}">
+            <p>안녕하세요, <span th:text="${name}"></span>님!</p>
+            <div id="countdown" style="color: green;"></div> <!-- 시간을 표시할 영역 -->
+        </div>
+        <div th:unless="${username}">
+            <p>Please log in</p>
+        </div>
     </div>
-    <div th:unless="${username}">
-        <p>Please log in</p>
-    </div>
-    <div th:replace="thymeleaf/th_footer :: test_copyParam('Serendi date','010-0000-0000')"></div>
-	</div>
+
+    <footer th:fragment="test_copyParam(param1, param2)" class="footer-container text-center text-small">
+        <div class="footer-content">
+            <div class="row">
+                <div class="col"><a th:href="@{/}" class="nav-link"><img src="/images/home_icon.png"></a></div>
+                <div class="col" th:if="${session.username}"><a th:href="@{/user/logout}" class="nav-link" onclick="showLogoutPopup()"><img src="/images/logout_icon.png"></a></div>
+                <div class="col" th:unless="${session.username}"><a th:href="@{/user/login}" class="nav-link"><img src="/images/login_icon.png"></a></div>
+                <div class="col"><a th:href="@{/user}" class="nav-link"><img src="/images/mypage_icon.png"></a></div>
+                <div class="col"><a th:href="@{/meeting}" class="nav-link"><img src="/images/meeting_icon2.png"></a></div>
+            </div>
+        </div>
+    </footer>
+
     <!-- JavaScript 코드 -->
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script>
         function updateCountdown() {
-		    // 특정 날짜 설정 (월은 0부터 시작)
-		    const targetDate = new Date(2024, 3, 22, 22, 0, 0); // 예: 2024년 6월 1일
-		
-		    // 현재 시간
-		    const now = new Date();
-		
-		    // 특정 날짜까지의 남은 시간 계산 (밀리초 단위)
-		    const diff = targetDate.getTime() - now.getTime();
-		
-		    // 시간, 분, 초 계산
-		    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-		    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-		    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-		
-		    // 결과를 HTML 요소에 반영
-		    const countdownElement = document.getElementById('countdown');
-		    countdownElement.innerHTML = `
-		        <p>다음 소개팅 시간까지: ${days}:${hours}:${minutes}:${seconds}</p>
-		    `;
-		}
-
+            // 특정 날짜 설정 (월은 0부터 시작)
+            const targetDate = new Date(2024, 3, 22, 22, 0, 0); // 예: 2024년 6월 1일
+        
+            // 현재 시간
+            const now = new Date();
+        
+            // 특정 날짜까지의 남은 시간 계산 (밀리초 단위)
+            const diff = targetDate.getTime() - now.getTime();
+        
+            // 시간, 분, 초 계산
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+            // 결과를 HTML 요소에 반영
+            const countdownElement = document.getElementById('countdown');
+            countdownElement.innerHTML = `
+                <p>다음 소개팅 시간까지: ${days}일 ${hours}시간 ${minutes}분 ${seconds}초</p>
+            `;
+        }
 
         // 초기 실행
         updateCountdown();
@@ -100,4 +108,3 @@
     </script>
 </body>
 </html>
-

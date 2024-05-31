@@ -53,13 +53,10 @@
 		        
 		        <input type="radio" id="female" name="gender" value="여" th:checked="${gender == '여'}">
 		        <label for="female">여성</label>
-		        
-		        <input type="radio" id="other" name="gender" value="공개안함" th:checked="${gender == '공개안함'}">
-		        <label for="other">공개안함</label>
 		    </div>
 		</div>
         <div class="form-group">
-            <label for="hobby">취미:</label>
+            <label for="hobby">카카오톡 ID(검색허용필수):</label>
             <input type="text" class="form-control" id="hobby" name="hobby" th:value="${hobby}">
         </div>
         <div class="form-group">
@@ -74,6 +71,23 @@
             <label for="school">학교:</label>
             <input type="text" class="form-control" id="school" name="school" th:value="${school}">
         </div>
+        <div class="form-group">
+		    <label for="form">체형:</label><br>
+		    <div class="radio-buttons">
+		        <input type="radio" id="thin" name="form" value="마른" th:required="true" th:checked="${form == '마른'}">
+		        <label for="thin">마른</label>
+		        
+		        <input type="radio" id="common" name="form" value="보통" th:checked="${form == '보통'}">
+		        <label for="common">보통</label>
+		        
+		        <input type="radio" id="chubby" name="form" value="통통" th:checked="${form == '통통'}">
+		        <label for="chubby">통통</label>
+		    </div>
+		</div>
+        <div class="form-group">
+            <label for="introduce">자기소개:</label>
+            <input type="text" class="form-control" id="introduce" name="introduce" th:value="${introduce}">
+        </div>
 		<div class="form-group">
             <label for="file">(선택) 프로필이미지:</label>
             <input type="file" class="form-control" id="file" name="file" th:required="false">
@@ -83,7 +97,17 @@
     	<a th:href="@{/user}" class="btn btn-primary">뒤로 가기</a>
     </form>
 </div>
-<div th:replace="thymeleaf/th_footer :: test_copyParam('Serendi date','010-0000-0000')">
+    <footer th:fragment="test_copyParam(param1, param2)" class="footer-container text-center text-small">
+        <div class="footer-content">
+            <div class="row">
+                <div class="col"><a th:href="@{/}" class="nav-link"><img src="/images/home_icon.png"></a></div>
+                <div class="col" th:if="${session.username}"><a th:href="@{/user/logout}" class="nav-link" onclick="showLogoutPopup()"><img src="/images/logout_icon.png"></a></div>
+                <div class="col" th:unless="${session.username}"><a th:href="@{/user/login}" class="nav-link"><img src="/images/login_icon.png"></a></div>
+                <div class="col"><a th:href="@{/user}" class="nav-link"><img src="/images/mypage_icon.png"></a></div>
+                <div class="col"><a th:href="@{/meeting}" class="nav-link"><img src="/images/meeting_icon2.png"></a></div>
+            </div>
+        </div>
+    </footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

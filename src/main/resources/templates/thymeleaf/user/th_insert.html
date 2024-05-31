@@ -7,24 +7,39 @@
     <!-- 부트스트랩 CSS 링크 추가 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<style>
-    .radio-buttons input[type="radio"] {
-        display: none; /* 기존 라디오 버튼 숨기기 */
-    }
-    
-    .radio-buttons label {
-        display: inline-block;
-        padding: 8px 16px;
-        margin-right: 10px;
-        background-color: #f2f2f2;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    
-    .radio-buttons input[type="radio"]:checked + label {
-        background-color: #2196F3;
-        color: white;
-    }
+        .radio-buttons input[type="radio"] {
+            display: none; /* 기존 라디오 버튼 숨기기 */
+        }
+
+        .radio-buttons label {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-right: 10px;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .radio-buttons input[type="radio"]:checked + label {
+            background-color: #2196F3;
+            color: white;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        /* 컨테이너의 하단 여백 추가 */
+        .container {
+            margin-bottom: 80px; /* footer의 높이와 동일한 여백을 주세요 */
+        }
 	</style>
 </head>
 <body>
@@ -38,7 +53,7 @@
             <input type="text" class="form-control" id="realname" name="realname" th:required="true">
         </div>
         <div class="form-group">
-            <label for="username">(필수) 사용자명:</label>
+            <label for="username">(필수) 아이디:</label>
             <input type="text" class="form-control" id="username" name="username" th:required="true">
         </div>
         <div class="form-group">
@@ -48,32 +63,37 @@
 		<div class="form-group">
 		    <label for="gender">(필수) 성별:</label><br>
 		    <div class="radio-buttons">
-		        <input type="radio" id="male" name="gender" value="남성" th:required="true">
+		        <input type="radio" id="male" name="gender" value="남" th:required="true">
 		        <label for="male">남성</label>
 		        
-		        <input type="radio" id="female" name="gender" value="여성">
+		        <input type="radio" id="female" name="gender" value="여">
 		        <label for="female">여성</label>
-		        
-		        <input type="radio" id="other" name="gender" value="공개안함">
-		        <label for="other">공개안함</label>
 		    </div>
 		</div>
 
         <div class="form-group">
-            <label for="pw">(선택) 취미:</label>
-            <input type="text" class="form-control" id="hobby" name="hobby" th:required="false">
+            <label for="pw">카카오톡 ID(검색허용필수):</label>
+            <input type="text" class="form-control" id="hobby" name="hobby" th:required="true">
         </div>
         <div class="form-group">
-            <label for="age">(선택) 나이:</label>
-            <input type="number" class="form-control" id="age" name="age" th:required="false">
+            <label for="age">(필수) 나이:</label>
+            <input type="number" class="form-control" id="age" name="age" th:required="true">
         </div>
         <div class="form-group">
-            <label for="school">(선택) 학교:</label>
-            <input type="text" class="form-control" id="school" name="school" th:required="false">
+            <label for="school">(필수) 학교:</label>
+            <input type="text" class="form-control" id="school" name="school" th:required="true">
         </div>
         <div class="form-group">
-            <label for="tel">(선택) 전화번호:</label>
-            <input type="text" class="form-control" id="tel" name="tel" th:required="false">
+            <label for="tel">(필수) 전화번호:</label>
+            <input type="text" class="form-control" id="tel" name="tel" th:required="true">
+        </div>
+        <div class="form-group">
+            <label for="form">체형:</label>
+            <input type="text" class="form-control" id="form" name="form" th:required="false">
+        </div>
+        <div class="form-group">
+            <label for="introduce">자기소개:</label>
+            <input type="text" class="form-control" id="introduce" name="introduce" th:required="false">
         </div>
         <div class="form-group">
             <label for="file_img">(선택) 프로필이미지:</label>
@@ -83,7 +103,17 @@
         <a th:href="@{/user/login}" class="btn btn-primary">뒤로 가기</a>
     </form>
 </div>
-<div th:replace="thymeleaf/th_footer :: test_copyParam('Serendi date','010-0000-0000')">
+<footer th:fragment="test_copyParam(param1, param2)" class="footer-container text-center text-small">
+        <div class="footer-content">
+            <div class="row">
+                <div class="col"><a th:href="@{/}" class="nav-link"><img src="/images/home_icon.png"></a></div>
+                <div class="col" th:if="${session.username}"><a th:href="@{/user/logout}" class="nav-link" onclick="showLogoutPopup()"><img src="/images/logout_icon.png"></a></div>
+                <div class="col" th:unless="${session.username}"><a th:href="@{/user/login}" class="nav-link"><img src="/images/login_icon.png"></a></div>
+                <div class="col"><a th:href="@{/user}" class="nav-link"><img src="/images/mypage_icon.png"></a></div>
+                <div class="col"><a th:href="@{/meeting}" class="nav-link"><img src="/images/meeting_icon2.png"></a></div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
 

@@ -56,11 +56,19 @@ public class UserDTO {
 	@Column(name="tel",nullable = true)
 	private String tel;
 	
+	@Column(name="introduce",nullable = true)
+	private String introduce;
+	
+	@Column(name="form",nullable = true)
+	private String form;
+	
 	@Column(name="save_name",nullable = true)
 	private String save_name;
 	
 	@Column(name="file_path",nullable = true)
 	private String file_path;
+	
+
 	
 	
 	//날짜타입의 기본은 타임스템프

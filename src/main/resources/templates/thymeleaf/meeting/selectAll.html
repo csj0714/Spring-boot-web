@@ -1,45 +1,67 @@
-<html xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="common_content(title)">
-	<div class="container">
-		<div class="input-form-backgroud row">
-			<div class="input-form col-md-12 mx-auto">
-				<h4 class="mb-3">[[${title}]]</h4>
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">NUM</th>
-							<th scope="col">신청자</th>
-							<th scope="col">신청자닉네임</th>
-							<th scope="col">신청자받은사람</th>
-							<th scope="col">신청자받은사람닉네임</th>
-							<th scope="col">REGDATE</th>
-							<th scope="col"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<th:block th:each="vo : ${vos}">
-							<tr>
-								<td><a th:href="|m_selectOne?num=${vo.num}|"><span
-										th:text="${vo.num}"></span></a></td>
-								<td><span th:text="${vo.applicantRealName}"></span></td>
-								<td><span th:text="${vo.applicantNickname}"></span></td>
-								<td><span th:text="${vo.receiverRealName}"></span></td>
-								<td><span th:text="${vo.receiverNickname}"></span></td>
-								<td><span th:text="${vo.regdate}"></span></td>
-									<td><a th:href="|/meeting/delete?receiverNum=${vo.receiverNum}|"><span>delete</span></a></td>
-							</tr>
-						</th:block>
-						
-					</tbody>
-					<tfoot>
-						<tr>
-						<td><a th:href="|/meeting|"><span>뒤로가기</span></a></tfoot>
-						</tr>
-					</tfoot>
-				</table>
-				
-			</div>
-		</div>
-	</div>
-</div>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>신청자 정보 리스트</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f2f2f2; /* 회색 배경색 */
+        }
+
+        .user-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+            background-color: #fff; /* 카드 배경색 */
+            background-size: cover;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .card-content p {
+            margin: 0;
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div th:fragment="common_content(title)">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 mx-auto">
+                    <h4 class="mb-3">[[${title}]]</h4>
+                    <div class="row">
+                        <th:block th:each="vo : ${vos}">
+                            <div class="col-12 col-md-6 mb-3">
+                                <div class="user-card">
+                                    <div class="card-title">
+                                        <a th:href="|m_selectOne?num=${vo.num}|"><span th:text="${vo.num}"></span></a>
+                                    </div>
+                                    <div class="card-content">
+                                        <p><strong>신청자:</strong> <span th:text="${vo.applicantRealName}"></span></p>
+                                        <p><strong>신청자 닉네임:</strong> <span th:text="${vo.applicantNickname}"></span></p>
+                                        <p><strong>받은 사람:</strong> <span th:text="${vo.receiverRealName}"></span></p>
+                                        <p><strong>받은 사람 닉네임:</strong> <span th:text="${vo.receiverNickname}"></span></p>
+                                        <p><strong>등록일:</strong> <span th:text="${vo.regdate}"></span></p>
+                                        <a th:href="|/meeting/delete?receiverNum=${vo.receiverNum}|"><span>delete</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </th:block>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a th:href="|/meeting|"><span>뒤로가기</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>

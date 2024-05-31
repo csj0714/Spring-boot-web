@@ -6,9 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
-            background-color: #f2f2f2; /* 회색 배경색 */
-        }
 
         .user-card {
             border: 1px solid #ccc;
@@ -22,6 +19,15 @@
             background-size: cover;
             padding-left: 50px;
 			padding-top: 150px;
+        }        /* 하단에 고정되도록 스타일 추가 */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            text-align: center;
+            padding: 10px 0;
         }
     </style> 
     </style>
@@ -42,7 +48,7 @@
 	                <p><strong>나이:</strong> <span th:text="${age}"></span></p>
 	                <p><strong>학교:</strong> <span th:text="${school}"></span></p>
 	                <p><strong>전화번호:</strong> <span th:text="${tel}"></span></p>
-					<img th:src="@{'/files/' + ${savename}}" alt="Image">
+					<img th:src="@{'/files/' + ${savename}}" alt="Image" width="100px">
 
 
  
@@ -59,6 +65,17 @@
         </div>
     </div>
 </div>
+    <footer th:fragment="test_copyParam(param1, param2)" class="footer-container text-center text-small">
+        <div class="footer-content">
+            <div class="row">
+                <div class="col"><a th:href="@{/}" class="nav-link"><img src="/images/home_icon.png"></a></div>
+                <div class="col" th:if="${session.username}"><a th:href="@{/user/logout}" class="nav-link" onclick="showLogoutPopup()"><img src="/images/logout_icon.png"></a></div>
+                <div class="col" th:unless="${session.username}"><a th:href="@{/user/login}" class="nav-link"><img src="/images/login_icon.png"></a></div>
+                <div class="col"><a th:href="@{/user}" class="nav-link"><img src="/images/mypage_icon.png"></a></div>
+                <div class="col"><a th:href="@{/meeting}" class="nav-link"><img src="/images/meeting_icon2.png"></a></div>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>

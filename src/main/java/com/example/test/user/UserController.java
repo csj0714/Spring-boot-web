@@ -64,47 +64,42 @@ public class UserController {
 		return "thymeleaf/user/th_insert";
 	}
 	@PostMapping("/user/insertOK") 
-	public String u_insertOK(UserDTO vo, MultipartFile file) throws IllegalStateException, IOException {
+	public String u_insertOK(UserDTO vo, @RequestParam("file") MultipartFile file) throws IllegalStateException, IOException {
 		log.info("회원가입 확인");
 		log.info("vo:{}", vo);
 		
-		String realPath = sContext.getRealPath("resources/uploadimg");
-		log.info(realPath);
+        if (vo.getRegdate() == null) {
+            vo.setRegdate(new Date());
+        }
 
-		String originName = file.getOriginalFilename();
+	    if (!file.isEmpty()) {
+	        // Generate file name
+	        String originalFileName = file.getOriginalFilename();
+	        String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+	        String fileName = UUID.randomUUID() + extension;
 
-		log.info("getOriginalFilename:{}", originName);
+	        // File path
+	        String filePath = uploadPath + File.separator + fileName;
 
-		if (originName.length() == 0) {
-			vo.setSave_name("default.png");// 이미지선택없이 처리할때
-		} else {
-			String save_img = "img_" + System.currentTimeMillis() + originName.substring(originName.lastIndexOf("."));
+	        // Save the file
+	        try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)))) {
+	            stream.write(file.getBytes());
+	        }
 
-			vo.setSave_name(save_img);
+	        // Update DTO with new file information
+	        vo.setSave_name(fileName);
+	        vo.setFile_path("/uploadimg/" + fileName);
+	    }
 
-			File uploadFile = new File(realPath, save_img);
-			file.transferTo(uploadFile);// 원본 이미지저장
+        // DB에 저장
+        UserDTO result = service.insertOK(vo);
 
-			//// create thumbnail image/////////
-			BufferedImage original_buffer_img = ImageIO.read(uploadFile);
-			BufferedImage thumb_buffer_img = new BufferedImage(50, 50, BufferedImage.TYPE_3BYTE_BGR);
-			Graphics2D graphic = thumb_buffer_img.createGraphics();
-			graphic.drawImage(original_buffer_img, 0, 0, 50, 50, null);
+        if (result != null) {
+            return "redirect:/user/info";
+        } else {
+            return "redirect:/user/info/update";
+        }
 
-			File thumb_file = new File(realPath, "thumb_" + save_img);
-
-			ImageIO.write(thumb_buffer_img, save_img.substring(save_img.lastIndexOf(".") + 1), thumb_file);
-
-		}
-
-		UserDTO result = service.insertOK(vo);
-		log.info("result:{}", result);
-
-		if (result != null) {
-			return "redirect:/home";
-		} else {
-			return "redirect:u_insert";
-		}
 	}
 	@GetMapping("/user/info/update")
 	public String info(UserDTO vo, Model model) {
@@ -119,6 +114,10 @@ public class UserController {
 		String name = (String)session.getAttribute("name");
 		String school = (String)session.getAttribute("school");
 		String tel = (String)session.getAttribute("tel");
+		String form = (String)session.getAttribute("form");
+		String introduce = (String)session.getAttribute("introduce");
+		
+		
 		
 		model.addAttribute("title", "회원수정페이지");
 		model.addAttribute("username", username);
@@ -129,44 +128,58 @@ public class UserController {
 		model.addAttribute("name", name);
 		model.addAttribute("school", school);
 		model.addAttribute("tel", tel);
+		model.addAttribute("form", form);
+		model.addAttribute("introduce", introduce);
+
 
 		model.addAttribute("content", "thymeleaf/user/th_update");
 		model.addAttribute("title", "회원수정페이지");
 		return "thymeleaf/user/th_update";
 	}
-	  @PostMapping("/user/info/updateOK")
-	    public String u_updateOK(UserDTO vo, @RequestParam("file") MultipartFile file) throws Exception {
-	        // 수정일자 반영 안하면 null값이 들어가는 것을 방지하기 위해...
-	        if (vo.getRegdate() == null) {
-	            vo.setRegdate(new Date());
-	        }
+	@PostMapping("/user/info/updateOK")
+	public String u_updateOK(UserDTO vo, @RequestParam("file") MultipartFile file) throws Exception {
+	    String savename = (String) session.getAttribute("savename");
 
-	        // 파일 이름 생성
+	    // Check if a new file is uploaded
+	    if (!file.isEmpty()) {
+	        // Generate file name
 	        String originalFileName = file.getOriginalFilename();
 	        String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
 	        String fileName = UUID.randomUUID() + extension;
 
-	        // 파일 저장 경로 설정
+	        // File path
 	        String filePath = uploadPath + File.separator + fileName;
 
-	        // 파일 저장
+	        // Save the file
 	        try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filePath)))) {
 	            stream.write(file.getBytes());
 	        }
 
-	        // 저장된 파일 정보를 DTO에 설정
+	        // Update DTO with new file information
 	        vo.setSave_name(fileName);
 	        vo.setFile_path("/uploadimg/" + fileName);
-
-	        // DB에 저장
-	        UserDTO result = service.updateOK(vo);
-
-	        if (result != null) {
-	            return "redirect:/user/info";
-	        } else {
-	            return "redirect:/user/info/update";
-	        }
+	    } else {
+	        // If no new file uploaded, retain the previous image information
+	        vo.setSave_name(savename);
+	        // Assuming the file path is saved in the UserDTO, set it accordingly
+	        // vo.setFile_path(previousFilePath);
 	    }
+
+	    // Ensure the regdate is set
+	    if (vo.getRegdate() == null) {
+	        vo.setRegdate(new Date());
+	    }
+
+	    // Update the user information in the database
+	    UserDTO result = service.updateOK(vo);
+
+	    if (result != null) {
+	        return "redirect:/user/info";
+	    } else {
+	        return "redirect:/user/info/update";
+	    }
+	}
+
 
 
 
@@ -234,6 +247,8 @@ public class UserController {
 			session.setAttribute("school", vo2.getSchool());
 			session.setAttribute("tel", vo2.getTel());
 			session.setAttribute("savename", vo2.getSave_name());
+			session.setAttribute("form", vo2.getForm());
+			session.setAttribute("introduce", vo2.getIntroduce());
 			
 			return "redirect:/";
 		}
@@ -269,6 +284,8 @@ public class UserController {
 		String school = (String)session.getAttribute("school");
 		String tel = (String)session.getAttribute("tel");
 		String savename = (String)session.getAttribute("savename");
+		String form = (String)session.getAttribute("form");
+		String introduce = (String)session.getAttribute("introduce");
 		log.info("savename:{}",savename);
 		
 		model.addAttribute("title", "회원수정페이지");
@@ -281,6 +298,8 @@ public class UserController {
 		model.addAttribute("school", school);
 		model.addAttribute("tel", tel);
 		model.addAttribute("savename", savename);
+		model.addAttribute("form", form);
+		model.addAttribute("introduce", introduce);
 
 		model.addAttribute("content", "thymeleaf/user/th_update");
 		model.addAttribute("title", "회원정보페이지");

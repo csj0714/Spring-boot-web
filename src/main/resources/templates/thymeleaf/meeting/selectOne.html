@@ -15,55 +15,48 @@
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
-            width: 460px;
-            height: 670px;
+            width: 100%;
             background-color: #fff; /* 카드 배경색 */
-            background-image: url('/images/my_card5.png');
             background-size: cover;
-            padding-left: 50px;
-			padding-top: 150px;
         }
-    </style>
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .card-content p {
+            margin: 0;
+            padding: 5px 0;
+        }
     </style>
 </head>
 <body>
 	<div th:replace="thymeleaf/th_top_menu :: test_top_menu"></div>
-<div class="container">
-		<div class="input-form-backgroud row">
-			<div class="input-form col-md-12 mx-auto">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 mx-auto">
 				<h4 class="mb-3">[[${title}]]</h4>
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">NUM</th>
-							<th scope="col">신청자</th>
-							<th scope="col">신청자닉네임</th>
-							<th scope="col">신청자받은사람</th>
-							<th scope="col">신청자받은사람닉네임</th>
-							<th scope="col">REGDATE</th>
-							<th scope="col"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<th:block th:each="vo : ${vos}">
-							<tr>
-								<th scope="row"><a th:href="|/meeting/register?num=${vo.num}|"><span>[[${vo.num}]]</span></a></th>
-								<td><span th:text="${vo.applicantNum}"></span></td>
-								<td><span th:text="${vo.applicantRealName}"></span></td>
-								<td><span th:text="${vo.applicantNickname}"></span></td>
-								<td><span th:text="${vo.receiverNum}"></span></td>
-								<td><span th:text="${vo.receiverRealName}"></span></td>
-								<td><span th:text="${vo.receiverNickname}"></span></td>
-								<td><span th:text="${vo.regdate}"></span></td>
-									<td><a th:href="|/meeting/delete?receiverNum=${vo.receiverNum}&applicantNum=${vo.applicantNum}|"><span>delete</span></a></td>
-							</tr>
-						</th:block>
-					</tbody>
-				</table>
-				<a th:href="|/meeting/selectAll|"><span>미팅목록</span></a>
+				<div class="row">
+					<th:block th:each="vo : ${vos}">
+						<div class="col-12 col-md-6 mb-3">
+							<div class="user-card">
+								<div class="card-title">
+								</div>
+								<div class="card-content">
+									<p><strong>신청날짜:</strong> <span th:text="${vo.regdate}"></span></p>
+									<a th:href="|/meeting/delete?receiverNum=${vo.receiverNum}&applicantNum=${vo.applicantNum}|"><span>delete</span></a>
+									<p>수락대기중</p>
+								</div>
+							</div>
+						</div>
+					</th:block>
+				</div>
+				<div class="text-center mt-4">
+					<a th:href="|/meeting/selectAll|"><span>미팅목록</span></a>
+				</div>
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>

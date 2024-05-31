@@ -42,6 +42,8 @@ public class UserService {
 	        existingUser.setAge(vo.getAge());
 	        existingUser.setSave_name(vo.getSave_name());
 	        existingUser.setFile_path(vo.getFile_path());
+	        existingUser.setForm(vo.getForm());
+	        existingUser.setIntroduce(vo.getIntroduce());
 	        
 	        
 	        updateSession(existingUser);
@@ -64,6 +66,8 @@ public class UserService {
 	    session.setAttribute("school", user.getSchool());
 	    session.setAttribute("tel", user.getTel());
 	    session.setAttribute("savename", user.getSave_name());
+	    session.setAttribute("form", user.getForm());
+	    session.setAttribute("introduce", user.getIntroduce());
 	}
 	public int deleteOK(String username) {
 		return userRepo.deleteByUsername(username);
