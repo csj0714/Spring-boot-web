@@ -1,4 +1,4 @@
-package com.example.test.meeting;
+package com.example.test.date;
 
 import java.util.List;
 import java.util.Random;
@@ -18,13 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class MeetingService {
+public class DateService {
 	
 	@Autowired
-	private MeetingRepository meetingRepo;
-	
-	@Autowired
-	private MeetingApplicationRepository meetingApplRepo;
+	private DateRepository DateRepo;
 	
 	@Autowired
 	private UserRepository userRepo;
@@ -33,15 +30,13 @@ public class MeetingService {
 	private HttpSession session;
 	
     private List<UserDTO> selectedUsers;
-    private List<MeetingDTO> selectedMeetings;
-    
     private long lastSelectedTime;
     private final Lock lock = new ReentrantLock();
 
     public List<UserDTO> selectRandomTwo(String username, String gender) {
         long currentTime = System.currentTimeMillis();
         // 60초 이내에 호출되면 이전에 선택된 사용자를 반환
-        if (selectedUsers != null && (currentTime - lastSelectedTime) < 5000) {
+        if (selectedUsers != null && (currentTime - lastSelectedTime) < 24 * 3600 * 1000) {
             return selectedUsers;
         }
 
@@ -88,39 +83,39 @@ public class MeetingService {
         }
     }
 
-    @Transactional
-	public MeetingRegister registerMeeting(MeetingRegister register) {
-		return meetingApplRepo.save(register);
+
+	public DateDTO registerDate(DateDTO dto) {
+		log.info("디티오:{}",dto.toString());
+		return DateRepo.save(dto);
 	}
 
-	public List<MeetingDTO> selectAll() {
-		return meetingRepo.findAll();
+	public List<DateDTO> selectAll() {
+		return DateRepo.findAll();
 	}
 
 
-
-
-
-	public List<MeetingDTO> ramdomMeetingTwo(UserDTO currentUser) {
-		List<MeetingDTO> allMeetings = meetingRepo.findAll();
-
-        // 현재 사용자가 주최자이거나 이미 신청한 미팅을 제외
-        List<MeetingDTO> filteredMeetings = allMeetings.stream()
-            .filter(meeting -> meeting.getOrganizerNum() != currentUser.getNum())
-            .collect(Collectors.toList());
-
-        // 두 개의 랜덤 미팅 선택
-        Random random = new Random();
-        return random.ints(0, filteredMeetings.size())
-            .distinct()
-            .limit(2)
-            .mapToObj(filteredMeetings::get)
-            .collect(Collectors.toList());
-    }
-
-
-	public MeetingDTO insertOK(MeetingDTO vo) {
-		return meetingRepo.save(vo);
+	public List<DateDTO> selectOne(int num) {
+		return DateRepo.findByApplicantNum(num);
 	}
+
+
+	public List<DateDTO> selectReceiver(int receiverNum) {
+		return DateRepo.findByApplicantNum(receiverNum);
+	}
+
+
+	public DateDTO selectByReceiverAndApplicant(int receiverNum, int applicantNum) {
+		return DateRepo.findByReceiverNumAndApplicantNum(receiverNum, applicantNum);
+	}
+
+	public int deleteByReceiverAndApplicant(int receiverNum, int applicantNum) {
+		return DateRepo.deleteByReceiverNumAndApplicantNum(receiverNum, applicantNum);
+	}
+	@Transactional
+	public int deleteByNum(int num) {
+		return DateRepo.deleteByNum(num);
+	}
+
+
 }
 

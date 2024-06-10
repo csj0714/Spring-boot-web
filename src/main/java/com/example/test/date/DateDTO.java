@@ -1,19 +1,14 @@
-package com.example.test.meeting;
+package com.example.test.date;
 
 import java.util.Date;
-import java.util.List;
 
+import com.example.test.meeting.MeetingDTO;
 
-import com.example.test.user.UserDTO;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -22,31 +17,31 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="meetings")
-public class MeetingDTO {
+@Table(name="date")
+public class DateDTO {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="num")//컬럼이름 설정
 	private int num;
 	
-	@Column(name="organizerNum",nullable = false)
-	private int organizerNum;
+	@Column(name="applicantNum",nullable = false)
+	private int applicantNum;
 	
-	@Column(name="organizerNickname",nullable = false)
-	private String organizerNickname;
+	@Column(name="applicantRealName",nullable = false)
+	private String applicantRealName;
 	
-	@Column(name="many",nullable = false)
-	private Integer many;
+	@Column(name="applicantNickname",nullable = false)
+	private String applicantNickname;
 	
-	@Column(name="school",nullable = false)
-	private String school;
+	@Column(name="receiverNum",nullable = false)
+	private int receiverNum;
 	
-	@Column(name="average",nullable = false)
-	private Integer average;
+	@Column(name="receiverRealName",nullable = false)
+	private String receiverRealName;
 	
-	@Column(name="introduce",nullable = false)
-	private String introduce;
+	@Column(name="receiverNickname",nullable = false)
+	private String receiverNickname;
 	
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "regdate", updatable = false)

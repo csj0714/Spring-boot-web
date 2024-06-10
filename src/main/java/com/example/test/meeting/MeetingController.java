@@ -35,7 +35,16 @@ public class MeetingController {
 	public String meeting(Model model) {
 		log.info("/meeting...");
 		
-		List<UserDTO> vos = meetingService.selectRandomTwo();
+		int num = (int) session.getAttribute("num");
+		
+		log.info("num:{}", num);
+		
+		UserDTO loginUser = new UserDTO();
+		loginUser.setNum(num);
+		
+		UserDTO currentUser = userService.selectOne(loginUser);
+		
+		List<MeetingDTO> vos = meetingService.ramdomMeetingTwo(currentUser);
 		log.info("vos :{}", vos.toString());
         
 		model.addAttribute("vos", vos);
@@ -44,103 +53,67 @@ public class MeetingController {
 		return "thymeleaf/meeting/select";
 	}
 	
-	@GetMapping("/meeting/register")
-	public String register(UserDTO vo, Model model) {
+	@GetMapping("/meeting/insert")
+	public String insert(UserDTO vo, Model model) {
 		log.info("/register...");
 		
 		UserDTO vo2 = userService.selectOne(vo);
+		String username = (String)session.getAttribute("username");
+		int num = (int)session.getAttribute("num");
+		
+		model.addAttribute("username", username);
+		model.addAttribute("num", num);
 		
 		model.addAttribute("vo2", vo2);
 		
-		return "thymeleaf/meeting/register";
+		return "thymeleaf/meeting/insert";
 	}
-	
-	@PostMapping("/meeting/registerOK")
-	public String registerOK(UserDTO vo, Model model) {
-		log.info("/registerOK...");
-		
-		log.info("vo:{}",vo.toString());
-		UserDTO vo2 = userService.selectOne(vo);
-		log.info("vo2 :{}", vo2.toString());
-		String username = (String) session.getAttribute("username");
-		String name = (String) session.getAttribute("name");
-		int num = (Integer) session.getAttribute("num");
-		
-		log.info("username:{}", username);
-		log.info("name: {}", name);
 
+	@PostMapping("/meeting/insertOK")
+	public String insertOK(MeetingDTO vo, Model model) {
+		log.info("/register...");
 		
+		MeetingDTO vo2 = meetingService.insertOK(vo);
 		
+		model.addAttribute("vo2", vo2);
 		
-		MeetingDTO dto = new MeetingDTO();
-		dto.setApplicantNickname(username);
-		dto.setApplicantRealName(name);
-		dto.setApplicantNum(num);
-		dto.setReceiverNickname(vo2.getUsername());
-		dto.setReceiverRealName(vo2.getRealname());
-		dto.setReceiverNum(vo2.getNum());
-		log.info(dto.toString());
-		String msg;
-		MeetingDTO meeting = meetingService.selectByReceiverAndApplicant(vo2.getNum(), num);
-		if(meeting == null) {
-			MeetingDTO registeredMeeting  = meetingService.registerMeeting(dto);
-			msg = "미팅 신청이 완료되었습니다.";
-	        log.info(msg);
-	        session.setAttribute("msg", msg);
-	        return "redirect:/";
-		}else {
-			msg = "이미 신청된 미팅입니다.";
-	        session.setAttribute("msg", msg);
-	        return "redirect:/meeting";
-		}
-	}
-	@GetMapping("/meeting/selectAll")
-	public String meetingAll(Model model) {
-		log.info("/meeting/selectAll...");
-		
-		List<MeetingDTO> vos = meetingService.selectAll();
-		
-		model.addAttribute("vos", vos);
-		
-		return "thymeleaf/meeting/selectAll";
-	}
-	@GetMapping("/meeting/selectOne")
-	public String meetingOne(Model model) {
-		log.info("/meeting/selectOne...");
-		
-		int num = (Integer) session.getAttribute("num");
-		log.info("num:{}", num);
-		
-		List<MeetingDTO> vos = meetingService.selectOne(num);
-		
-		model.addAttribute("vos", vos);
-		
-		return "thymeleaf/meeting/selectOne";
-	}
-	@GetMapping("/meeting/delete")
-	public String delete(MeetingDTO vo, Model model) {
-		log.info("/meeting/delete");
-		log.info("vo:{}", vo.getApplicantNum());
-		log.info("vo:{}", vo.getReceiverNum());
-		
-		MeetingDTO meeting = meetingService.selectByReceiverAndApplicant(vo.getReceiverNum(), vo.getApplicantNum());
-		log.info("vo2:{}", meeting.toString());
-		
-		model.addAttribute("vo2", meeting);
-		
-		return "thymeleaf/meeting/delete";
-	}
-	@PostMapping("/meeting/deleteOK")
-	public String deleteOK(@RequestParam("num") int num, Model model) {
-		log.info("/meeting/deleteOK");
-		log.info("vo:{}", num);
-		
-		int result = meetingService.deleteByNum(num);
-		log.info("result :{}", result);
-		if(result == 1) {
-			return "redirect:/meeting/selectOne";
+		if(vo2 != null) {
+			return "redirect:/menu";
 		}else {
 			return "redirect:/meeting/delete";
+		}
+	}
+	@GetMapping("/meeting/register")
+	public String register(MeetingDTO vo, Model model) {
+		log.info("/register...");
+		
+		int meetingNum = vo.getNum();
+		int organizerNum = vo.getOrganizerNum();
+		
+		
+		model.addAttribute("meetingNum", meetingNum);
+		model.addAttribute("organizerNum", organizerNum);
+		
+		return "thymeleaf/meeting/register";
+	}
+	@PostMapping("/meeting/registerOK")
+	public String registerOK(MeetingDTO dto, UserDTO vo, Model model) {
+		log.info("/registerOK...");
+		log.info("vo:{}", vo.toString());
+		
+		MeetingRegister register = new MeetingRegister();
+		register.setMeetingNum(dto.getNum());
+		register.setUserNum(vo.getNum());
+		register.setStatus("신청중");
+		log.info(register.toString());
+		MeetingRegister result = meetingService.registerMeeting(register);
+		
+		model.addAttribute("result", result);
+		
+		if(result != null) {
+			return "redirect:/";
+		}else {
+			return "redirect:/meeting/register";
 		}
 	}
 }

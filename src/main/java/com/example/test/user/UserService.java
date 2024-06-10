@@ -36,7 +36,7 @@ public class UserService {
 	        existingUser.setPw(vo.getPw());
 	        existingUser.setTel(vo.getTel());
 	        existingUser.setGender(vo.getGender());
-	        existingUser.setHobby(vo.getHobby());
+	        existingUser.setKakaoID(vo.getKakaoID());
 	        existingUser.setSchool(vo.getSchool());
 	        existingUser.setTel(vo.getTel());
 	        existingUser.setAge(vo.getAge());
@@ -60,7 +60,7 @@ public class UserService {
 	    session.setAttribute("username", user.getUsername());
 	    session.setAttribute("pw", user.getPw());
 	    session.setAttribute("gender", user.getGender());
-	    session.setAttribute("hobby", user.getHobby());
+	    session.setAttribute("kakaoID", user.getKakaoID());
 	    session.setAttribute("age", user.getAge());
 	    session.setAttribute("name", user.getRealname());
 	    session.setAttribute("school", user.getSchool());

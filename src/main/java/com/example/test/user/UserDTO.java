@@ -1,15 +1,21 @@
 package com.example.test.user;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.example.test.meeting.MeetingDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -41,8 +47,8 @@ public class UserDTO {
 	@Column(name="pw",nullable = false)
 	private String pw;
 	
-	@Column(name="hobby",nullable = true)
-	private String hobby;
+	@Column(name="kakaoID",nullable = true)
+	private String kakaoID;
 	
 	@Column(name="age",nullable = true)
 	private Integer age;
@@ -68,13 +74,13 @@ public class UserDTO {
 	@Column(name="file_path",nullable = true)
 	private String file_path;
 	
-
 	
+	@Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "regdate", updatable = false)
+    private Date regdate;
 	
-	//날짜타입의 기본은 타임스템프
-	@Temporal(TemporalType.TIMESTAMP)//연월일 시분초 밀리초
-//	@Temporal(TemporalType.DATE)//연월일
-	@Column(name="regdate",insertable = false) //입력시 sysdate으로 처리,수정시 널값반영(이럴때는 new Date()처리해준다.)
-	@ColumnDefault(value="sysdate")
-	private Date regdate;
+	@PrePersist
+    protected void onCreate() {
+        regdate = new Date();
+    }
 }

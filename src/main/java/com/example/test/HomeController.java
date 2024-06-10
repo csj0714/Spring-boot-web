@@ -37,7 +37,7 @@ public class HomeController {
 		return "thymeleaf/th_home";
 	}
 	@GetMapping("/top_menu")
-	public String menu(HttpSession session, Model model) {
+	public String topMenu(HttpSession session, Model model) {
 		
 		String username = (String) session.getAttribute("username");
 		
@@ -45,5 +45,15 @@ public class HomeController {
 		
 		
 		return "thymeleaf/th_top_menu";
+	}
+	
+	@GetMapping("/menu")
+	public String menu(HttpSession session, Model model) {
+		
+		String username = (String) session.getAttribute("username");
+		
+		model.addAttribute("username", username);
+		
+		return "thymeleaf/menu";
 	}
 }

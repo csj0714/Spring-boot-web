@@ -15,7 +15,6 @@
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
-            width: 100%;
             background-color: #fff; /* 카드 배경색 */
             background-size: cover;
         }
@@ -29,34 +28,46 @@
             margin: 0;
             padding: 5px 0;
         }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 	<div th:replace="thymeleaf/th_top_menu :: test_top_menu"></div>
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12 mx-auto">
+		<div class="input-form-backgroud row">
+			<div class="input-form col-md-12 mx-auto">
 				<h4 class="mb-3">[[${title}]]</h4>
 				<div class="row">
 					<th:block th:each="vo : ${vos}">
 						<div class="col-12 col-md-6 mb-3">
 							<div class="user-card">
 								<div class="card-title">
+									<p><span th:text="${vo.username}"></span></p>
 								</div>
 								<div class="card-content">
-									<p><strong>신청날짜:</strong> <span th:text="${vo.regdate}"></span></p>
-									<a th:href="|/date/delete?receiverNum=${vo.receiverNum}&applicantNum=${vo.applicantNum}|"><span>delete</span></a>
-									<p>수락대기중</p>
+									<img class="profile-img" th:src="@{'/files/' + ${vo.save_name}}" alt="Image">
+									<p><span th:text="${vo.school}"></span></p>
+									<p><span th:text="${vo.age}"></span></p>
+									<p><span th:text="${vo.form}"></span></p>
+									<p><span th:text="${vo.introduce}"></span></p>
+									<a th:href="|/date/register?num=${vo.num}|"><span>선택</span></a>
 								</div>
 							</div>
 						</div>
 					</th:block>
 				</div>
 				<div class="text-center mt-4">
-					<a th:href="|/date/selectAll|"><span>미팅목록</span></a>
+					<a th:href="|/date/selectAll|"><span>미팅전체목록</span></a>
+					<a th:href="|/date/selectOne|"><span>나의미팅</span></a>
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
 </html>
+

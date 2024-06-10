@@ -47,15 +47,15 @@
 						<div class="col-12 col-md-6 mb-3">
 							<div class="user-card">
 								<div class="card-title">
-									<p><span th:text="${vo.username}"></span></p>
+									<p><span th:text="${vo.num}"></span></p>
+									<p><span th:text="${vo.organizerNickname}"></span></p>
 								</div>
 								<div class="card-content">
-									<img class="profile-img" th:src="@{'/files/' + ${vo.save_name}}" alt="Image">
-									<p><span th:text="${vo.school}"></span></p>
-									<p><span th:text="${vo.age}"></span></p>
-									<p><span th:text="${vo.form}"></span></p>
-									<p><span th:text="${vo.introduce}"></span></p>
-									<a th:href="|/meeting/register?num=${vo.num}|"><span>선택</span></a>
+									<p>학교: <span th:text="${vo.school}"></span></p>
+									<p>평균나이: <span th:text="${vo.average}"></span></p>
+									<p>참가자 수: <span th:text="${vo.many}"></span></p>
+									<p>자기소개: <span th:text="${vo.introduce}"></span></p>
+									<a th:href="|/meeting/register?organizerNum=${vo.organizerNum}&num=${vo.num}|"><span>선택</span></a>
 								</div>
 							</div>
 						</div>
@@ -63,6 +63,7 @@
 				</div>
 				<div class="text-center mt-4">
 					<a th:href="|/meeting/selectAll|"><span>미팅전체목록</span></a>
+					<a th:href="|/meeting/insert|"><span>미팅생성</span></a>
 					<a th:href="|/meeting/selectOne|"><span>나의미팅</span></a>
 				</div>
 			</div>

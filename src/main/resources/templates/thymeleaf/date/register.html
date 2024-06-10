@@ -20,11 +20,10 @@
     <div th:insert="thymeleaf/th_top_menu :: test_top_menu"></div>
     <div class="container">
         <h2>미팅신청</h2>
-        <form th:action="@{/meeting/registerOK}" method="post" onsubmit="showPopup()">
+        <form th:action="@{/date/registerOK}" method="post" onsubmit="showPopup()">
             <div class="form-group">
-            <label for="name"><span th:text="${meetingNum}"></span>번방에 미팅신청을 하시겠습니까?</label>
-            <input type="hidden" class="form-control" id="num" name="num" th:value="${meetingNum}" required>
-            <input type="hidden" class="form-control" id="num" name="num" th:value="${organizerNum}" required>
+            <label for="name"><span th:text="${vo2.realname}"></span>님에게 미팅신청을 하시겠습니까?</label>
+            <input type="hidden" class="form-control" id="num" name="num" th:value="${vo2.num}" required>
             </div>
             <button id="btn" type="submit" class="btn btn-danger">신청하기</button>
         </form>

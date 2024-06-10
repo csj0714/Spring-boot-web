@@ -46,60 +46,30 @@
 	<div th:insert="thymeleaf/th_top_menu :: test_top_menu"></div>
 <div class="container">
 	
-    <h2>회원가입</h2>
-    <form th:action="@{/user/insertOK}" method="post" enctype="multipart/form-data">
+    <h2>미팅신청</h2>
+    <form th:action="@{/meeting/insertOK}" method="post" enctype="multipart/form-data">
+		<input type="hidden" class="form-control" id="organizerNum" name="organizerNum" th:value="${num}" th:required="true">
 		<div class="form-group">
-            <label for="realname">(필수) 이름:</label>
-            <input type="text" class="form-control" id="realname" name="realname" th:required="true">
+            <label for="realname">주최자닉네임:  <span th:text="${username}"></span></label>
+            <input type="hidden" class="form-control" id="organizerNickname" name="organizerNickname" th:value="${username}" th:required="true">
         </div>
         <div class="form-group">
-            <label for="username">(필수) 아이디:</label>
-            <input type="text" class="form-control" id="username" name="username" th:required="true">
+            <label for="school">학교:</label>
+            <input type="text" class="form-control" id="school" name="school" th:required="false">
         </div>
-        <div class="form-group">
-            <label for="pw">(필수) 비밀번호:</label>
-            <input type="password" class="form-control" id="pw" name="pw" th:required="true">
-        </div>
-		<div class="form-group">
-		    <label for="gender">(필수) 성별:</label><br>
-		    <div class="radio-buttons">
-		        <input type="radio" id="male" name="gender" value="남" th:required="true">
-		        <label for="male">남성</label>
-		        
-		        <input type="radio" id="female" name="gender" value="여">
-		        <label for="female">여성</label>
-		    </div>
-		</div>
-
-        <div class="form-group">
-            <label for="kakaoID">카카오톡 ID(검색허용필수):</label>
-            <input type="text" class="form-control" id="kakaoID" name="kakaoID" th:required="true">
-        </div>
-        <div class="form-group">
-            <label for="age">(필수) 나이:</label>
-            <input type="number" class="form-control" id="age" name="age" th:required="true">
-        </div>
-        <div class="form-group">
-            <label for="school">(필수) 학교:</label>
-            <input type="text" class="form-control" id="school" name="school" th:required="true">
-        </div>
-        <div class="form-group">
-            <label for="tel">(필수) 전화번호:</label>
-            <input type="text" class="form-control" id="tel" name="tel" th:required="true">
-        </div>
-        <div class="form-group">
-            <label for="form">체형:</label>
-            <input type="text" class="form-control" id="form" name="form" th:required="false">
+                <div class="form-group">
+            <label for="average">평균나이:</label>
+            <input type="text" class="form-control" id="average" name="average" th:required="false">
         </div>
         <div class="form-group">
             <label for="introduce">자기소개:</label>
             <input type="text" class="form-control" id="introduce" name="introduce" th:required="false">
         </div>
         <div class="form-group">
-            <label for="file_img">(선택) 프로필이미지:</label>
-            <input type="file" class="form-control" id="file" name="file" th:required="false">
+            <label for="many">미팅참가자수:</label>
+            <input type="text" class="form-control" id="many" name="many" th:required="false">
         </div>
-        <button type="submit" class="btn btn-primary">가입</button>
+        <button type="submit" class="btn btn-primary">미팅생성</button>
         <a th:href="@{/user/login}" class="btn btn-primary">뒤로 가기</a>
     </form>
 </div>

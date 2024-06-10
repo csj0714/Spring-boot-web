@@ -6,11 +6,13 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
+@EnableScheduling
 @EnableAspectJAutoProxy
 @ComponentScan
 @SpringBootApplication
-@EntityScan(basePackages = {"com.example.test.user","com.example.test.board","com.example.test.meeting"})
+@EntityScan(basePackages = {"com.example.test.user","com.example.test.board","com.example.test.meeting","com.example.test.date"})
 public class TestApplication {
 	
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {

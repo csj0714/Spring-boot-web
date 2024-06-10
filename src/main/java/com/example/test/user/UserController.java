@@ -41,9 +41,6 @@ public class UserController {
 	@Autowired
 	private HttpSession session;
 	
-	@Autowired
-	private ServletContext sContext;
-	
     @Value("${upload.path}") // application.properties에서 설정한 경로
     private String uploadPath;
     
@@ -109,7 +106,7 @@ public class UserController {
 		String username = (String)session.getAttribute("username");
 		String pw = (String)session.getAttribute("pw");
 		String gender = (String)session.getAttribute("gender");
-		String hobby = (String)session.getAttribute("hobby");
+		String kakaoID = (String)session.getAttribute("kakaoID");
 		Integer age = (Integer)session.getAttribute("age");
 		String name = (String)session.getAttribute("name");
 		String school = (String)session.getAttribute("school");
@@ -123,7 +120,7 @@ public class UserController {
 		model.addAttribute("username", username);
 		model.addAttribute("pw", pw);
 		model.addAttribute("gender", gender);
-		model.addAttribute("hobby", hobby);
+		model.addAttribute("kakaoID", kakaoID);
 		model.addAttribute("age", age);
 		model.addAttribute("name", name);
 		model.addAttribute("school", school);
@@ -241,7 +238,7 @@ public class UserController {
 			session.setAttribute("username", vo2.getUsername());
 			session.setAttribute("pw", vo2.getPw());
 			session.setAttribute("gender", vo2.getGender());
-			session.setAttribute("hobby", vo2.getHobby());
+			session.setAttribute("kakaoID", vo2.getKakaoID());
 			session.setAttribute("age", vo2.getAge());
 			session.setAttribute("name", vo2.getRealname());
 			session.setAttribute("school", vo2.getSchool());
@@ -259,10 +256,11 @@ public class UserController {
 	public String logout() {
 		log.info("로그인 확인");
 		
+		session.removeAttribute("num");
 		session.removeAttribute("username");
 		session.removeAttribute("pw");
 		session.removeAttribute("gender");
-		session.removeAttribute("hobby");
+		session.removeAttribute("kakaoID");
 		session.removeAttribute("age");
 		session.removeAttribute("name");
 		session.removeAttribute("school");
@@ -278,7 +276,7 @@ public class UserController {
 		String username = (String)session.getAttribute("username");
 		String pw = (String)session.getAttribute("pw");
 		String gender = (String)session.getAttribute("gender");
-		String hobby = (String)session.getAttribute("hobby");
+		String kakaoID = (String)session.getAttribute("kakaoID");
 		Integer age = (Integer)session.getAttribute("age");
 		String name = (String)session.getAttribute("name");
 		String school = (String)session.getAttribute("school");
@@ -292,7 +290,7 @@ public class UserController {
 		model.addAttribute("username", username);
 		model.addAttribute("pw", pw);
 		model.addAttribute("gender", gender);
-		model.addAttribute("hobby", hobby);
+		model.addAttribute("kakaoID", kakaoID);
 		model.addAttribute("age", age);
 		model.addAttribute("name", name);
 		model.addAttribute("school", school);
