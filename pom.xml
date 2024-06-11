@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.3</version>
+		<version>3.3.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 		
 	</parent>
@@ -53,7 +53,7 @@
 		<dependency>
 		    <groupId>com.mysql</groupId>
 		    <artifactId>mysql-connector-j</artifactId>
-		    <version>8.3.0</version>
+		    <version>8.0.33</version>
 		</dependency>
 
 
@@ -76,7 +76,7 @@
 			<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version> <!-- 버전은 필요에 따라 변경할 수 있습니다. -->
+                <version>3.4.1</version>
                 <configuration>
                     <archive>
                         <manifest>
