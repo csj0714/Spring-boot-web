@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.0</version>
+		<version>3.2.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 		
 	</parent>
@@ -13,7 +13,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>test</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	
 	<name>test</name>
 	<description>Demo project for Spring Boot</description>
@@ -49,11 +49,17 @@
 		    <artifactId>mariadb-java-client</artifactId>
 		    <scope>runtime</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>boot05mybatis_oracle</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
 		<dependency>
 		    <groupId>com.mysql</groupId>
 		    <artifactId>mysql-connector-j</artifactId>
-		    <version>8.0.33</version>
+		    <version>8.3.0</version>
 		</dependency>
 
 
@@ -74,18 +80,13 @@
 				</configuration>
 			</plugin>
 			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.1</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>your.main.Class</mainClass> <!-- 실행할 메인 클래스의 경로를 지정합니다. -->
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-compiler-plugin</artifactId>
+	            <version>3.11.0</version>
+	            <configuration>
+	                <release>17</release>
+	            </configuration>
+	        </plugin>
 		</plugins>
 	</build>
 
