@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용자 정보</title>
+    <!-- 부트스트랩 CSS 링크 추가 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* 사용자 정보 페이지 스타일 */
+        .container {
+            margin-top: 50px;
+        }
+        .btn-link {
+            margin-bottom: 10px;
+            display: block;
+        }
+        .footer{
+			
+		}
+    </style>
+</head>
+<body>
+	<div th:insert="thymeleaf/th_top_menu :: test_top_menu"></div>
+    <div class="container">
+		<a href="https://forms.gle/We4yr9NGqfRdmZnw9"><img src="images/card_choice5.png" width="49%"></a>
+		<a href="https://forms.gle/Utpe2fTrWtH9bism9"><img src="images/card_choice6.png" width="49%"></a>
+    </div>
+    <div class = "footer" clath:replace="thymeleaf/th_footer :: test_copyParam('Serendi date','010-0000-0000')">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

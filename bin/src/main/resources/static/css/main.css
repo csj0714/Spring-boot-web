@@ -1,0 +1,34 @@
+body {
+	min-height: 100vh;
+	background: -webkit-gradient(linear, left bottom, right top, from(white),
+		to(white));
+	background: -webkit-linear-gradient(bottom left, white);
+	background: -moz-linear-gradient(bottom left, white);
+	background: -o-linear-gradient(bottom left, white);
+	background: linear-gradient(to top right, white);
+}
+
+.input-form {
+	max-width: 680px;
+	margin-top: 80px;
+	padding: 32px;
+	background: white;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+	-moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+}
+
+select {
+	width: 100px;
+	padding: .4em .5em;
+	border: 1px solid white;
+	font-family: inherit;
+	background: url('/images/arrow.png') no-repeat 95% 50%;
+	border-radius: 0px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}

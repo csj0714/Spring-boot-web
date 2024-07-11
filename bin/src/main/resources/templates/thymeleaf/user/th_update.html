@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+    .radio-buttons input[type="radio"] {
+        display: none; /* 기존 라디오 버튼 숨기기 */
+    }
+    
+    .radio-buttons label {
+        display: inline-block;
+        padding: 8px 16px;
+        margin-right: 10px;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    
+    .radio-buttons input[type="radio"]:checked + label {
+        background-color: #2196F3;
+        color: white;
+    }
+	</style>
+</head>
+<body>
+<div th:insert="thymeleaf/th_top_menu :: test_top_menu"></div>
+<div class="container mt-5">
+    <h2 class="mb-3">회원정보 및 수정</h2>
+    <form th:action="@{/user/info/updateOK}" method="post" encType="multipart/form-data">
+		
+		<div class="form-group">
+            <label for="name">아이디: <span th:text="${username}"></span></label>
+            <input type="hidden" class="form-control" id="username" name="username" th:value="${username}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="pw">비밀번호: <span th:text="${#strings.repeat('*', pw.length)}"></span></label>
+            <input type="hidden" class="form-control" id="pw" name="pw" th:value="${pw}" required>
+        </div>
+        <div class="form-group">
+            <label for="realname">이름:</label> 
+            <input type="text" class="form-control" id="realname" name="realname" th:value="${name}" required>
+        </div>
+		<div class="form-group">
+		    <label for="gender">(필수) 성별:</label><br>
+		    <div class="radio-buttons">
+		        <input type="radio" id="male" name="gender" value="남" th:required="true" th:checked="${gender == '남'}">
+		        <label for="male">남성</label>
+		        
+		        <input type="radio" id="female" name="gender" value="여" th:checked="${gender == '여'}">
+		        <label for="female">여성</label>
+		    </div>
+		</div>
+        <div class="form-group">
+            <label for="hobby">카카오톡 ID(검색허용필수):</label>
+            <input type="text" class="form-control" id="kakaoID" name="kakaoID" th:value="${kakaoID}">
+        </div>
+        <div class="form-group">
+            <label for="tel">전화번호:</label>
+            <input type="text" class="form-control" id="tel" name="tel" th:value="${tel}">
+        </div>
+		<div class="form-group">
+            <label for="age">나이:</label>
+            <input type="text" class="form-control" id="age" name="age" th:value="${age}">
+        </div>
+        <div class="form-group">
+            <label for="school">학교:</label>
+            <input type="text" class="form-control" id="school" name="school" th:value="${school}">
+        </div>
+        <div class="form-group">
+		    <label for="form">체형:</label><br>
+		    <div class="radio-buttons">
+		        <input type="radio" id="thin" name="form" value="마른" th:required="true" th:checked="${form == '마른'}">
+		        <label for="thin">마른</label>
+		        
+		        <input type="radio" id="common" name="form" value="보통" th:checked="${form == '보통'}">
+		        <label for="common">보통</label>
+		        
+		        <input type="radio" id="chubby" name="form" value="통통" th:checked="${form == '통통'}">
+		        <label for="chubby">통통</label>
+		    </div>
+		</div>
+        <div class="form-group">
+            <label for="introduce">자기소개:</label>
+            <input type="text" class="form-control" id="introduce" name="introduce" th:value="${introduce}">
+        </div>
+		<div class="form-group">
+            <label for="file">(선택) 프로필이미지:</label>
+            <input type="file" class="form-control" id="file" name="file" th:required="false">
+        </div>
+        <button type="submit" class="btn btn-primary">저장</button>
+        <a href="/user/info/delete"><button type="button" class="btn btn-primary">삭제</button></a>
+    	<a th:href="@{/user}" class="btn btn-primary">뒤로 가기</a>
+    </form>
+</div>
+    <footer th:fragment="test_copyParam(param1, param2)" class="footer-container text-center text-small">
+        <div class="footer-content">
+            <div class="row">
+                <div class="col"><a th:href="@{/}" class="nav-link"><img src="/images/home_icon.png"></a></div>
+                <div class="col" th:if="${session.username}"><a th:href="@{/user/logout}" class="nav-link" onclick="showLogoutPopup()"><img src="/images/logout_icon.png"></a></div>
+                <div class="col" th:unless="${session.username}"><a th:href="@{/user/login}" class="nav-link"><img src="/images/login_icon.png"></a></div>
+                <div class="col"><a th:href="@{/user}" class="nav-link"><img src="/images/mypage_icon.png"></a></div>
+                <div class="col"><a th:href="@{/menu}" class="nav-link"><img src="/images/meeting_icon2.png"></a></div>
+            </div>
+        </div>
+    </footer>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

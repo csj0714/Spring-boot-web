@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 정보</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+
+        .user-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 460px;
+            height: 670px;
+            background-color: #fff; /* 카드 배경색 */
+            background-image: url('/images/my_card5.png');
+            background-size: cover;
+            padding-left: 50px;
+			padding-top: 150px;
+        }        /* 하단에 고정되도록 스타일 추가 */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style> 
+    </style>
+</head>
+<body>
+	<div th:replace="thymeleaf/th_top_menu :: test_top_menu"></div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+            <div th:if="${username}" class="user-card">
+                <div class="info">
+	                <p><strong>안녕하세요,  <span th:text="${name}"></span>님</strong></p>
+	                <p><strong>이름:</strong> <span th:text="${name}"></span></p>
+	                <p><strong>아이디:</strong> <span th:text="${username}"></span></p>
+<!--	                <p><strong>비밀번호:</strong> <span th:text="${#strings.repeat('*', pw.length)}"></span></p>-->
+	                <p><strong>성별:</strong> <span th:text="${gender}"></span></p>
+	                <p><strong>카카오ID:</strong> <span th:text="${kakaoID}"></span></p>
+	                <p><strong>나이:</strong> <span th:text="${age}"></span></p>
+	                <p><strong>학교:</strong> <span th:text="${school}"></span></p>
+	                <p><strong>전화번호:</strong> <span th:text="${tel}"></span></p>
+					<img th:src="@{'/files/' + ${savename}}" alt="Image" width="100px">
+
+
+ 
+                </div>
+            </div>
+            <div th:unless="${username}" class="text-center">
+                <p>회원 정보가 없습니다.</p>
+            </div>
+            
+            <div class="text-center">
+                <a th:href="@{/user/info/update}" class="btn btn-primary mr-2">정보 수정</a>
+                <a th:href="@{/user}" class="btn btn-primary">뒤로 가기</a>
+            </div>
+        </div>
+    </div>
+</div>
+    <footer th:fragment="test_copyParam(param1, param2)" class="footer-container text-center text-small">
+        <div class="footer-content">
+            <div class="row">
+                <div class="col"><a th:href="@{/}" class="nav-link"><img src="/images/home_icon.png"></a></div>
+                <div class="col" th:if="${session.username}"><a th:href="@{/user/logout}" class="nav-link" onclick="showLogoutPopup()"><img src="/images/logout_icon.png"></a></div>
+                <div class="col" th:unless="${session.username}"><a th:href="@{/user/login}" class="nav-link"><img src="/images/login_icon.png"></a></div>
+                <div class="col"><a th:href="@{/user}" class="nav-link"><img src="/images/mypage_icon.png"></a></div>
+                <div class="col"><a th:href="@{/menu}" class="nav-link"><img src="/images/meeting_icon2.png"></a></div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+
