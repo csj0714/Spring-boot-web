@@ -12,8 +12,13 @@
 	
 	<groupId>com.example</groupId>
 	<artifactId>test</artifactId>
+<<<<<<< HEAD
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
+=======
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+>>>>>>> 200f4048ede8d80d827a1681c9a3a84d68441038
 	
 	<name>test</name>
 	<description>Demo project for Spring Boot</description>
