@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @ComponentScan
 @SpringBootApplication
 @EntityScan(basePackages = {"com.example.test.user","com.example.test.board","com.example.test.meeting","com.example.test.date"})
-public class TestApplication {
+public class TestApplication{
 	
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(TestApplication.class);

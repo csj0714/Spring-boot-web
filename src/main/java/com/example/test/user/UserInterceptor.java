@@ -26,7 +26,10 @@ public class UserInterceptor implements HandlerInterceptor{
 		log.info("sPath:{}", sPath);
 		log.info("username:{}", session.getAttribute("username"));
 		
-		if(sPath.equals("/user/logout") || sPath.equals("/user/info") || sPath.equals("/user/info/updateOK") || sPath.equals("/user/info/delete") || sPath.equals("/user/info/deleteOK") || sPath.equals("/user/info/update") ) {
+		if(sPath.equals("/user/logout") || sPath.equals("/user/info") || sPath.equals("/user/info/updateOK") || sPath.equals("/user/info/delete") || sPath.equals("/user/info/deleteOK") || sPath.equals("/user/info/update")
+		|| sPath.equals("/meeting") || sPath.equals("/meeting/insert") || sPath.equals("/meeting/insertOK") || sPath.equals("/meeting/register")  || sPath.equals("/meeting/registerOK") || sPath.equals("/date")
+				|| sPath.equals("/date/register") || sPath.equals("/date/registerOK") || sPath.equals("/date/selectOne") || sPath.equals("/date/delete") || sPath.equals("/date/deleteOK") || sPath.equals("/date/selectAll") || sPath.equals("/menu")
+		) {
 			if(session.getAttribute("username")==null) {
 				response.sendRedirect("/user/login");
 				return false;

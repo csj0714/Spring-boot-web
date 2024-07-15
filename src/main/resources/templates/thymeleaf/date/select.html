@@ -68,6 +68,35 @@
 			</div>
 		</div>
 	</div>
+	<div class="footer-content">
+		<div class="row">
+			<div class="col-3 d-flex justify-content-center">
+				<a th:href="@{/}" class="nav-link">
+					<img src="/images/home_icon.png" alt="Home" style="width: 50px; height: 50px;">
+				</a>
+			</div>
+			<div class="col-3 d-flex justify-content-center" th:if="${session.username}">
+				<a th:href="@{/user/logout}" class="nav-link" onclick="showLogoutPopup()">
+					<img src="/images/logout_icon.png" alt="Logout" style="width: 50px; height: 50px;">
+				</a>
+			</div>
+			<div class="col-3 d-flex justify-content-center" th:unless="${session.username}">
+				<a th:href="@{/user/login}" class="nav-link">
+					<img src="/images/login_icon.png" alt="Login" style="width: 50px; height: 50px;">
+				</a>
+			</div>
+			<div class="col-3 d-flex justify-content-center">
+				<a th:href="@{/user}" class="nav-link">
+					<img src="/images/mypage_icon.png" alt="My Page" style="width: 50px; height: 50px;">
+				</a>
+			</div>
+			<div class="col-3 d-flex justify-content-center">
+				<a th:href="@{/menu}" class="nav-link">
+					<img src="/images/meeting_icon2.png" alt="Menu" style="width: 50px; height: 50px;">
+				</a>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
 

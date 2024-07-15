@@ -4,9 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
-		  footer {
+        p {
+            font-family: "Noto Sans KR", sans-serif;
+            font-weight: 10px;
+            font-style: normal;
+        }
+
+        body {
+            background-color: white;
+            margin-bottom: 60px; /* ensure content doesn't overlap the footer */
+        }
+        .sub_main {
+            display: flex;
+        }
+        .sub_main a img {
+            width: 100%; /* 이미지 부모 요소의 너비에 맞게 조절 */
+            height: auto; /* 가로 세로 비율 유지 */
+        }
+        .footer-container {
             position: fixed;
             bottom: 0;
             left: 0;
@@ -23,11 +40,11 @@
     <h2 class="mb-3">로그인</h2>
     <form th:action="@{/user/loginOK}" method="post">
         <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+            <label for="username">아이디:</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter ID" required>
         </div>
         <div class="form-group">
-            <label for="password">Password:</label>
+            <label for="password">비밀번호:</label>
             <input type="password" class="form-control" id="pw" name="pw" placeholder="Enter password" required>
         </div>
         <button type="submit" class="btn btn-primary">로그인</button>
@@ -36,17 +53,35 @@
     </form>
     
 </div>
-<footer th:fragment="test_copyParam(param1, param2)" class="footer-container text-center text-small">
-        <div class="footer-content">
-            <div class="row">
-                <div class="col"><a th:href="@{/}" class="nav-link"><img src="/images/home_icon.png"></a></div>
-                <div class="col" th:if="${session.username}"><a th:href="@{/user/logout}" class="nav-link" onclick="showLogoutPopup()"><img src="/images/logout_icon.png"></a></div>
-                <div class="col" th:unless="${session.username}"><a th:href="@{/user/login}" class="nav-link"><img src="/images/login_icon.png"></a></div>
-                <div class="col"><a th:href="@{/user}" class="nav-link"><img src="/images/mypage_icon.png"></a></div>
-                <div class="col"><a th:href="@{/menu}" class="nav-link"><img src="/images/meeting_icon2.png"></a></div>
-            </div>
+<div class="footer-content">
+    <div class="row">
+        <div class="col-3 d-flex justify-content-center">
+            <a th:href="@{/}" class="nav-link">
+                <img src="/images/home_icon.png" alt="Home" style="width: 50px; height: 50px;">
+            </a>
         </div>
-    </footer>
+        <div class="col-3 d-flex justify-content-center" th:if="${session.username}">
+            <a th:href="@{/user/logout}" class="nav-link" onclick="showLogoutPopup()">
+                <img src="/images/logout_icon.png" alt="Logout" style="width: 50px; height: 50px;">
+            </a>
+        </div>
+        <div class="col-3 d-flex justify-content-center" th:unless="${session.username}">
+            <a th:href="@{/user/login}" class="nav-link">
+                <img src="/images/login_icon.png" alt="Login" style="width: 50px; height: 50px;">
+            </a>
+        </div>
+        <div class="col-3 d-flex justify-content-center">
+            <a th:href="@{/user}" class="nav-link">
+                <img src="/images/mypage_icon.png" alt="My Page" style="width: 50px; height: 50px;">
+            </a>
+        </div>
+        <div class="col-3 d-flex justify-content-center">
+            <a th:href="@{/menu}" class="nav-link">
+                <img src="/images/meeting_icon2.png" alt="Menu" style="width: 50px; height: 50px;">
+            </a>
+        </div>
+    </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
