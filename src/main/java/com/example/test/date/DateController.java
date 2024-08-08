@@ -82,6 +82,7 @@ public class DateController {
 		dto.setReceiverNickname(vo2.getUsername());
 		dto.setReceiverRealName(vo2.getRealname());
 		dto.setReceiverNum(vo2.getNum());
+		dto.setAccept("waiting...");
 		log.info(dto.toString());
 		String msg;
 		DateDTO Date = dateService.selectByReceiverAndApplicant(vo2.getNum(), num);
@@ -120,6 +121,20 @@ public class DateController {
 		
 		return "thymeleaf/date/selectOne";
 	}
+	@GetMapping("/date/dateReceiveOne") //신청받은 소개팅
+	public String dateReceiveOne(Model model) {
+
+		int num = (Integer) session.getAttribute("num");
+        log.info("num:{}", num);
+
+		List<DateDTO> vos = dateService.selectOneReceiver(num);
+
+		model.addAttribute("vos", vos);
+
+
+		return "thymeleaf/date/dateReceiveOne";
+	}
+
 	@GetMapping("/date/delete")
 	public String delete(DateDTO vo, Model model) {
 		log.info("/Date/delete");
@@ -146,4 +161,18 @@ public class DateController {
 			return "redirect:/date/delete";
 		}
 	}
+	@PostMapping("/date/accept")
+	public String allow(@RequestParam("applicantNum") int applicantNum, @RequestParam("receiverNum") int receiverNum, @RequestParam("accept") String accept, Model model) {
+		log.info("/Date/accept");
+		log.info("vo:{}", receiverNum);
+
+		int result = dateService.updateAcceptField(accept, receiverNum, applicantNum);
+
+		if(result == 1) {
+			return "redirect:/date/selectOne";
+		}else {
+			return "redirect:/date";
+		}
+	}
+
 }

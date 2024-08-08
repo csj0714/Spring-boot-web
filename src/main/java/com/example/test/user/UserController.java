@@ -113,6 +113,13 @@ public class UserController {
 		String tel = (String)session.getAttribute("tel");
 		String form = (String)session.getAttribute("form");
 		String introduce = (String)session.getAttribute("introduce");
+		String nickname = (String)session.getAttribute("nickname");
+		String department = (String)session.getAttribute("department");
+		String job = (String)session.getAttribute("job");
+		String military = (String)session.getAttribute("military");
+		String region = (String)session.getAttribute("region");
+		String smoking = (String)session.getAttribute("smoking");
+		String tall = (String)session.getAttribute("tall");
 		
 		
 		
@@ -127,6 +134,13 @@ public class UserController {
 		model.addAttribute("tel", tel);
 		model.addAttribute("form", form);
 		model.addAttribute("introduce", introduce);
+		model.addAttribute("nickname", nickname);
+		model.addAttribute("department", department);
+		model.addAttribute("job", job);
+		model.addAttribute("military", military);
+		model.addAttribute("region", region);
+		model.addAttribute("smoking", smoking);
+		model.addAttribute("tall", tall);
 
 
 		model.addAttribute("content", "thymeleaf/user/th_update");

@@ -96,6 +96,19 @@ public class MeetingController {
 		
 		return "thymeleaf/meeting/register";
 	}
+	@GetMapping("/meeting/selectOne")
+	public String selectOne(MeetingDTO vo, Model model) {
+		log.info("/selectOne...");
+
+		int meetingNum = vo.getNum();
+		int organizerNum = vo.getOrganizerNum();
+
+
+		model.addAttribute("meetingNum", meetingNum);
+		model.addAttribute("organizerNum", organizerNum);
+
+		return "thymeleaf/meeting/selectOne";
+	}
 	@PostMapping("/meeting/registerOK")
 	public String registerOK(MeetingDTO dto, UserDTO vo, Model model) {
 		log.info("/registerOK...");

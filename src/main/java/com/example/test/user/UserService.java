@@ -34,6 +34,7 @@ public class UserService {
 	        // existingUser가 null이 아닌 경우에만 업데이트를 수행
 	        existingUser.setRealname(vo.getRealname());
 	        existingUser.setPw(vo.getPw());
+			existingUser.setNickname(vo.getNickname());
 	        existingUser.setTel(vo.getTel());
 	        existingUser.setGender(vo.getGender());
 	        existingUser.setKakaoID(vo.getKakaoID());
@@ -44,7 +45,12 @@ public class UserService {
 	        existingUser.setFile_path(vo.getFile_path());
 	        existingUser.setForm(vo.getForm());
 	        existingUser.setIntroduce(vo.getIntroduce());
-	        
+	        existingUser.setJob(vo.getJob());
+			existingUser.setMilitary(vo.getMilitary());
+			existingUser.setRegion(vo.getRegion());
+			existingUser.setTall(vo.getTall());
+			existingUser.setSmoking(vo.getSmoking());
+			existingUser.setDepartment(vo.getDepartment());
 	        
 	        updateSession(existingUser);
 	        return userRepo.save(existingUser);
@@ -59,6 +65,7 @@ public class UserService {
 	    // 세션에 사용자 정보 업데이트
 	    session.setAttribute("username", user.getUsername());
 	    session.setAttribute("pw", user.getPw());
+		session.setAttribute("nickname", user.getNickname());
 	    session.setAttribute("gender", user.getGender());
 	    session.setAttribute("kakaoID", user.getKakaoID());
 	    session.setAttribute("age", user.getAge());
@@ -68,6 +75,12 @@ public class UserService {
 	    session.setAttribute("savename", user.getSave_name());
 	    session.setAttribute("form", user.getForm());
 	    session.setAttribute("introduce", user.getIntroduce());
+		session.setAttribute("department", user.getDepartment());
+		session.setAttribute("job", user.getJob());
+		session.setAttribute("military", user.getMilitary());
+		session.setAttribute("region", user.getRegion());
+		session.setAttribute("smoking", user.getSmoking());
+		session.setAttribute("tall", user.getTall());
 	}
 	public int deleteOK(String username) {
 		return userRepo.deleteByUsername(username);

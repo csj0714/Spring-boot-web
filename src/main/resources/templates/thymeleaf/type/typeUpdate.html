@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .radio-buttons input[type="radio"] {
+            display: none; /* 기존 라디오 버튼 숨기기 */
+        }
+
+        .radio-buttons label {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-right: 10px;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .radio-buttons input[type="radio"]:checked + label {
+            background-color: #2196F3;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div th:insert="thymeleaf/th_top_menu :: test_top_menu"></div>
+<div class="container mt-5">
+    <h2 class="mb-3">이상형 정보 입력</h2>
+    <form th:action="@{/user/info/updateOK}" method="post" encType="multipart/form-data">
+
+
+        <div class="form-group">
+            <label for="tel">직업:</label>
+            <input type="text" class="form-control" id="tel" name="tel" th:value="${tel}">
+        </div>
+        <div class="form-group">
+            <label for="school">학과:</label>
+            <input type="text" class="form-control" id="school" name="school" th:value="${school}">
+        </div>
+        <div class="form-group">
+            <label for="school">지역:</label>
+            <input type="text" class="form-control" id="region" name="region" th:value="${region}">
+        </div>
+        <div class="form-group">
+            <label for="smoking">흡연유무:</label><br>
+            <div class="radio-buttons" id="smoking">
+                <input type="radio" id="yes" name="gender" value="yes" th:required="true" th:checked="${smoking == 'yes'}">
+                <label for="yes">흡연</label>
+
+                <input type="radio" id="no" name="gender" value="no" th:checked="${smoking == 'no'}">
+                <label for="no">비흡연</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="form">체형:</label><br>
+            <div class="radio-buttons" id="form">
+                <input type="radio" id="thin" name="form" value="마른" th:required="true" th:checked="${form == '마른'}">
+                <label for="thin">마른</label>
+
+                <input type="radio" id="common" name="form" value="보통" th:checked="${form == '보통'}">
+                <label for="common">보통</label>
+
+                <input type="radio" id="chubby" name="form" value="통통" th:checked="${form == '통통'}">
+                <label for="chubby">통통</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="army">병역:</label><br>
+            <div class="radio-buttons" id="army">
+                <input type="radio" id="fulfilled" name="fulfilled" value="fulfilled" th:required="true" th:checked="${army == 'fulfilled'}">
+                <label for="fulfilled">군필</label>
+
+                <input type="radio" id="unfulfilled" name="unfulfilled" value="unfulfilled" th:checked="${army == 'unfulfilled'}">
+                <label for="unfulfilled">미필</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="tall">체형:</label><br>
+            <div class="radio-buttons" id="tall">
+                <input type="radio" id="160" name="tall" value="160" th:required="true" th:checked="${tall == '160'}">
+                <label for="thin">마른</label>
+
+                <input type="radio" id="165" name="tall" value="165" th:checked="${tall == '165'}">
+                <label for="common">보통</label>
+
+                <input type="radio" id="170" name="tall" value="170" th:checked="${tall == '170'}">
+                <label for="chubby">통통</label>
+
+                <input type="radio" id="175" name="tall" value="175" th:checked="${tall == '175'}">
+                <label for="chubby">통통</label>
+
+                <input type="radio" id="180" name="tall" value="180" th:checked="${tall == '180'}">
+                <label for="chubby">통통</label>
+
+                <input type="radio" id="185" name="tall" value="185" th:checked="${tall == '185'}">
+                <label for="chubby">통통</label>
+
+                <input type="radio" id="190" name="tall" value="190" th:checked="${tall == '190'}">
+                <label for="chubby">통통</label>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">저장</button>
+        <a href="/user/info/delete"><button type="button" class="btn btn-primary">삭제</button></a>
+        <a th:href="@{/user}" class="btn btn-primary">뒤로 가기</a>
+    </form>
+</div>
+<div class="footer-content">
+    <div class="row">
+        <div class="col-3 d-flex justify-content-center">
+            <a th:href="@{/}" class="nav-link">
+                <img src="/images/home_icon.png" alt="Home" style="width: 50px; height: 50px;">
+            </a>
+        </div>
+        <div class="col-3 d-flex justify-content-center" th:if="${session.username}">
+            <a th:href="@{/user/logout}" class="nav-link" onclick="showLogoutPopup()">
+                <img src="/images/logout_icon.png" alt="Logout" style="width: 50px; height: 50px;">
+            </a>
+        </div>
+        <div class="col-3 d-flex justify-content-center" th:unless="${session.username}">
+            <a th:href="@{/user/login}" class="nav-link">
+                <img src="/images/login_icon.png" alt="Login" style="width: 50px; height: 50px;">
+            </a>
+        </div>
+        <div class="col-3 d-flex justify-content-center">
+            <a th:href="@{/user}" class="nav-link">
+                <img src="/images/mypage_icon.png" alt="My Page" style="width: 50px; height: 50px;">
+            </a>
+        </div>
+        <div class="col-3 d-flex justify-content-center">
+            <a th:href="@{/menu}" class="nav-link">
+                <img src="/images/meeting_icon2.png" alt="Menu" style="width: 50px; height: 50px;">
+            </a>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

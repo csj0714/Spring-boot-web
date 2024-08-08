@@ -42,6 +42,9 @@ public class DateDTO {
 	
 	@Column(name="receiverNickname",nullable = false)
 	private String receiverNickname;
+
+	@Column(name="accept",nullable = false)
+	private String accept;
 	
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "regdate", updatable = false)

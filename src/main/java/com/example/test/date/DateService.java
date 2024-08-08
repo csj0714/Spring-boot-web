@@ -99,11 +99,6 @@ public class DateService {
 	}
 
 
-	public List<DateDTO> selectReceiver(int receiverNum) {
-		return DateRepo.findByApplicantNum(receiverNum);
-	}
-
-
 	public DateDTO selectByReceiverAndApplicant(int receiverNum, int applicantNum) {
 		return DateRepo.findByReceiverNumAndApplicantNum(receiverNum, applicantNum);
 	}
@@ -116,6 +111,13 @@ public class DateService {
 		return DateRepo.deleteByNum(num);
 	}
 
+
+    public List<DateDTO> selectOneReceiver(int num) { return DateRepo.findByReceiverNum(num);
+    }
+
+    public int updateAcceptField(String accept, int receiverNum, int applicantNum) {
+        return DateRepo.updateAcceptField(accept, receiverNum, applicantNum);
+    }
 
 }
 

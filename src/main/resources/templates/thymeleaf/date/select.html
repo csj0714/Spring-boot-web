@@ -59,8 +59,13 @@
 					</th:block>
 				</div>
 				<div class="text-center mt-4">
-					<a th:href="|/date/selectAll|"><span>미팅전체목록</span></a>
+					<a th:if="${username == 'admin'}" th:href="@{/date/selectAll}">
+						<span>미팅전체목록</span>
+					</a>
+
+
 					<a th:href="|/date/selectOne|"><span>나의미팅</span></a>
+					<a th:href="|/date/dateReceiveOne|"><span>받은미팅</span></a>
 				</div>
 			</div>
 		</div>

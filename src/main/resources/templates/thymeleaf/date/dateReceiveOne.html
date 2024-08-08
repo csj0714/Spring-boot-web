@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 정보</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+
+
+        .user-card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 100%;
+            background-color: #fff; /* 카드 배경색 */
+            background-size: cover;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .card-content p {
+            margin: 0;
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="thymeleaf/th_top_menu :: test_top_menu"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <h4 class="mb-3">[[${title}]]</h4>
+            <div class="row">
+                <th:block th:each="vo : ${vos}">
+                    <div class="col-12 col-md-6 mb-3">
+                        <div class="user-card">
+                            <div class="card-title">
+                            </div>
+                            <div class="card-content">
+                                <p><strong>신청날짜:</strong> <span th:text="${vo.regdate}"></span></p>
+                                <a th:href="@{/date/accept(receiverNum=${vo.receiverNum}, applicantNum=${vo.applicantNum}, accept='allow')}">
+                                    <span>수락하기</span>
+                                </a>
+                                <a th:href="@{/date/accept(receiverNum=${vo.receiverNum}, applicantNum=${vo.applicantNum}, accept='cancel')}">
+                                    <span>수락취소</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+            <div class="text-center mt-4">
+                <a th:href="|/date/selectAll|"><span>미팅목록</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer-content">
+    <div class="row">
+        <div class="col-3 d-flex justify-content-center">
+            <a th:href="@{/}" class="nav-link">
+                <img src="/images/home_icon.png" alt="Home" style="width: 50px; height: 50px;">
+            </a>
+        </div>
+        <div class="col-3 d-flex justify-content-center" th:if="${session.username}">
+            <a th:href="@{/user/logout}" class="nav-link" onclick="showLogoutPopup()">
+                <img src="/images/logout_icon.png" alt="Logout" style="width: 50px; height: 50px;">
+            </a>
+        </div>
+        <div class="col-3 d-flex justify-content-center" th:unless="${session.username}">
+            <a th:href="@{/user/login}" class="nav-link">
+                <img src="/images/login_icon.png" alt="Login" style="width: 50px; height: 50px;">
+            </a>
+        </div>
+        <div class="col-3 d-flex justify-content-center">
+            <a th:href="@{/user}" class="nav-link">
+                <img src="/images/mypage_icon.png" alt="My Page" style="width: 50px; height: 50px;">
+            </a>
+        </div>
+        <div class="col-3 d-flex justify-content-center">
+            <a th:href="@{/menu}" class="nav-link">
+                <img src="/images/meeting_icon2.png" alt="Menu" style="width: 50px; height: 50px;">
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

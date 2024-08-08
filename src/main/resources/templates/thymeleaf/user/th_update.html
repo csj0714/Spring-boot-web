@@ -46,7 +46,7 @@
             <input type="text" class="form-control" id="realname" name="realname" th:value="${name}" required>
         </div>
 		<div class="form-group">
-		    <label for="gender">(필수) 성별:</label><br>
+		    <label for="gender">성별:</label><br>
 		    <div class="radio-buttons">
 		        <input type="radio" id="male" name="gender" value="남" th:required="true" th:checked="${gender == '남'}">
 		        <label for="male">남성</label>
@@ -56,7 +56,11 @@
 		    </div>
 		</div>
         <div class="form-group">
-            <label for="hobby">카카오톡 ID(검색허용필수):</label>
+            <label for="nickname">(필수) 닉네임:</label>
+            <input type="text" class="form-control" id="nickname" name="nickname" th:value="${nickname}"th:required="true">
+        </div>
+        <div class="form-group">
+            <label for="kakaoID">카카오톡 ID(검색허용필수):</label>
             <input type="text" class="form-control" id="kakaoID" name="kakaoID" th:value="${kakaoID}">
         </div>
         <div class="form-group">
@@ -73,7 +77,7 @@
         </div>
         <div class="form-group">
 		    <label for="form">체형:</label><br>
-		    <div class="radio-buttons">
+		    <div class="radio-buttons" id="form">
 		        <input type="radio" id="thin" name="form" value="마른" th:required="true" th:checked="${form == '마른'}">
 		        <label for="thin">마른</label>
 		        
@@ -84,6 +88,38 @@
 		        <label for="chubby">통통</label>
 		    </div>
 		</div>
+        <div class="form-group">
+            <label for="job">직업:</label>
+            <input type="text" class="form-control" id="job" name="job" th:value="${job}">
+        </div>
+        <div class="form-group">
+            <label for="department">학과:</label>
+            <input type="text" class="form-control" id="department" name="department" th:value="${department}">
+        </div>
+        <div class="form-group">
+            <label for="smoking">흡연유무:</label><br>
+            <div class="radio-buttons" id="smoking">
+                <input type="radio" id="yes" name="gender" value="yes" th:required="true" th:checked="${smoking == 'yes'}">
+                <label for="male">흡연</label>
+
+                <input type="radio" id="no" name="gender" value="no" th:checked="${smoking == 'no'}">
+                <label for="female">비흡연</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="school">지역:</label>
+            <input type="text" class="form-control" id="region" name="region" th:value="${region}">
+        </div>
+        <div class="form-group">
+            <label for="army">병역:</label><br>
+            <div class="radio-buttons" id="army">
+                <input type="radio" id="fulfilled" name="fulfilled" value="fulfilled" th:required="true" th:checked="${army == 'fulfilled'}">
+                <label for="male">군필</label>
+
+                <input type="radio" id="unfulfilled" name="unfulfilled" value="unfulfilled" th:checked="${army == 'unfulfilled'}">
+                <label for="female">미필</label>
+            </div>
+        </div>
         <div class="form-group">
             <label for="introduce">자기소개:</label>
             <input type="text" class="form-control" id="introduce" name="introduce" th:value="${introduce}">

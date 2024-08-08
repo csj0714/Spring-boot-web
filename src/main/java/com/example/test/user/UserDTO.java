@@ -43,6 +43,9 @@ public class UserDTO {
 	
 	@Column(name="username",nullable = false)
 	private String username;
+
+	@Column(name="nickname",nullable = false)
+	private String nickname;
 	
 	@Column(name="pw",nullable = false)
 	private String pw;
@@ -73,7 +76,24 @@ public class UserDTO {
 	
 	@Column(name="file_path",nullable = true)
 	private String file_path;
-	
+
+	@Column(name="job",nullable = true)
+	private String job;
+
+	@Column(name="region",nullable = true)
+	private String region;
+
+	@Column(name="military",nullable = true)
+	private String military;
+
+	@Column(name="tall",nullable = true)
+	private String tall;
+
+	@Column(name="department",nullable = true)
+	private String department;
+
+	@Column(name="smoking",nullable = true)
+	private String smoking;
 	
 	@Temporal(TemporalType.TIMESTAMP)
     @Column(name = "regdate", updatable = false)
